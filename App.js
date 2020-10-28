@@ -9,6 +9,7 @@ import StoreScreen from "./src/screens/StoreScreen";
 import ShareScreen from "./src/screens/ShareScreen";
 import ScanScreen from "./src/screens/ScanScreen";
 import CreateProfileScreen from "./src/screens/CreateProfileScreen";
+import SplashScreen from "./src/screens/SplashScreen";
 
 const Stack = createStackNavigator();
 
@@ -29,7 +30,7 @@ export default function App() {
   });
 
   if (!loaded) {
-    return null;
+    return <SplashScreen />;
   }
 
   return (

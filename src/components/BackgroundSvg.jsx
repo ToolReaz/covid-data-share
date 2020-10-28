@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet } from "react-native";
 import Svg, { Rect, G, Path, Defs, ClipPath } from "react-native-svg";
 export default function BackgroundSvg() {
   return (
