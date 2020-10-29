@@ -10,6 +10,7 @@ import ShareScreen from "./src/screens/ShareScreen";
 import ScanScreen from "./src/screens/ScanScreen";
 import CreateProfileScreen from "./src/screens/CreateProfileScreen";
 import SplashScreen from "./src/screens/SplashScreen";
+import { COLORS } from "./src/styles/colors";
 
 const Stack = createStackNavigator();
 
@@ -35,8 +36,27 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Navigator
+        initialRouteName="Home"
+        mode="card"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: COLORS.Primary,
+            borderBottomColor: COLORS.Contrast,
+            borderBottomWidth: 2,
+          },
+          headerTintColor: COLORS.White,
+          headerTitleStyle: {
+            fontFamily: "RobotoMedium",
+            fontSize: 24
+          }
+        }}
+      >
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={HomeScreen}
+        />
         <Stack.Screen name="Share" component={ShareScreen} />
         <Stack.Screen name="Scan" component={ScanScreen} />
         <Stack.Screen name="Store" component={StoreScreen} />

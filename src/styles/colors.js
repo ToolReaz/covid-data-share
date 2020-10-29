@@ -5,4 +5,5 @@ export const COLORS = {
     Primary: "#EF233C",
     Black: "#000000",
     White: "#ffffff",
+    Contrast: "#a82232",
 }
