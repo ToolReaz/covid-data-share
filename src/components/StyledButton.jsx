@@ -1,0 +1,24 @@
+import React from "react";
+import { Button, StyleSheet, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { COLORS } from "../styles/colors";
+
+export function StyledButton({ type, text, props }) {
+  const color = type == "primary" ? COLORS.Primary : COLORS.Dark;
+  return (
+    <TouchableOpacity style={{ backgroundColor: color }} {...props}>
+      <Text style={s.text}>{text}</Text>
+    </TouchableOpacity>
+  );
+}
+
+const s = StyleSheet.create({
+  text: {
+    fontSize: 24,
+    fontFamily: "RobotoRegular",
+    textAlign: "center",
+    textAlignVertical: "center",
+    color: COLORS.White,
+    padding: 8,
+  },
+});
