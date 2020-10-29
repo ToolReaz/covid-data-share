@@ -48,8 +48,8 @@ export default function App() {
           headerTintColor: COLORS.White,
           headerTitleStyle: {
             fontFamily: "RobotoMedium",
-            fontSize: 24
-          }
+            fontSize: 24,
+          },
         }}
       >
         <Stack.Screen
@@ -60,7 +60,11 @@ export default function App() {
         <Stack.Screen name="Share" component={ShareScreen} />
         <Stack.Screen name="Scan" component={ScanScreen} />
         <Stack.Screen name="Store" component={StoreScreen} />
-        <Stack.Screen name="CreateProfile" component={CreateProfileScreen} />
+        <Stack.Screen
+          options={{ title: "Create new profile" }}
+          name="CreateProfile"
+          component={CreateProfileScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
