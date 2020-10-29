@@ -19,6 +19,7 @@ const s = StyleSheet.create({
   container: {
     backgroundColor: COLORS.Light,
     padding: 8,
+    marginBottom: 10
   },
   line: {
     flexDirection: "row",
