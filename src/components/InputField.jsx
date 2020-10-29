@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { COLORS } from "../styles/colors";
 
-export default function InputField({ title }) {
+export default function InputField({ title, ...props }) {
   return (
     <View style={s.container}>
       <Text style={s.title}>{title}</Text>
@@ -11,6 +11,7 @@ export default function InputField({ title }) {
         placeholderTextColor={COLORS.LightDark}
         selectionColor={COLORS.LightDark}
         style={s.input}
+        {...props}
       />
     </View>
   );
