@@ -13,7 +13,10 @@ export default class HomeScreen extends Component {
         <BackgroundSvg />
         <View style={s.container}>
           <View style={s.topLinksView}>
-            <Text style={s.title}> APP TITLE </Text>
+            <View>
+              <Text style={s.title}>APP NAME</Text>
+              <View style={s.underline}></View>
+            </View>
             <View
               style={s.linkView}
               onTouchStart={() => this.props.navigation.navigate("Share")}
@@ -61,6 +64,13 @@ const s = StyleSheet.create({
     fontFamily: "RobotoLight",
     color: COLORS.Dark,
     textAlign: "center",
+  },
+
+  underline: {
+    width: "20%",
+    alignSelf: "center",
+    borderTopColor: COLORS.Primary,
+    borderTopWidth: 2,
   },
 
   subtitle: {
