@@ -33,7 +33,7 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={{ colors: { background: COLORS.White } }}>
       <Stack.Navigator
         initialRouteName="Home"
         mode="card"

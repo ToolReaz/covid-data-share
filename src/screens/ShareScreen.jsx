@@ -101,7 +101,6 @@ const s = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: COLORS.White,
   },
 
   modal: {
