@@ -19,7 +19,7 @@ export default class CreateProfileScreen extends Component {
     if (lastname != "" && firstname != "" && phone != "" && address != "") {
       const raw = await AsyncStorage.getItem("@covid-data-share/profiles");
       const profiles = raw ? JSON.parse(raw) : [];
-      const id = (await Random.getRandomBytesAsync(8)).toString("hex");
+      const id = (await Random.getRandomBytesAsync(8)).join("").toString("HEX");
       const updatedProfiles = [
         ...profiles,
         { id, lastname, firstname, phone, address },

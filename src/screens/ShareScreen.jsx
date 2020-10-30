@@ -22,12 +22,12 @@ export default class ShareScreen extends Component {
   }
 
   delete = async (id) => {
-    Alert.prompt(
-      "Are you sure ?",
-      `You are going to delete profile id: ${id}`,
-      () => {
-        console.log("deleted");
-      }
+    const { profiles } = this.state;
+    const filtered = profiles.filter((x) => x.id != id);
+    this.setState({ profiles: filtered });
+    await AsyncStorage.setItem(
+      "@covid-data-share/profiles",
+      JSON.stringify(filtered)
     );
   };
 
