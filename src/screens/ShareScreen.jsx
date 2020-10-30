@@ -6,38 +6,19 @@ import ProfileCard from "../components/ProfileCard";
 import { StyledButton } from "../components/StyledButton";
 import { COLORS } from "../styles/colors";
 import { Feather } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default class ShareScreen extends Component {
   state = {
     profiles: [],
   };
 
-  componentDidMount() {
-    this.setState({
-      profiles: [
-        {
-          id: "1",
-          lastname: "lastname",
-          firstname: "firstname",
-          address: "address",
-          phone: "phone",
-        },
-        {
-          id: "2",
-          lastname: "lastname",
-          firstname: "firstname",
-          address: "address",
-          phone: "phone",
-        },
-        {
-          id: "3",
-          lastname: "lastname",
-          firstname: "firstname",
-          address: "address",
-          phone: "phone",
-        },
-      ],
-    });
+  async componentDidMount() {
+    const raw = await AsyncStorage.getItem("@covid-data-share/profiles");
+    if (raw) {
+      const profiles = JSON.parse(raw);
+      this.setState({ profiles });
+    }
   }
 
   render() {
