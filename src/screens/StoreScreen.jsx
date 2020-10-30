@@ -9,35 +9,15 @@ import { AntDesign } from "@expo/vector-icons";
 
 export default class StoreScreen extends Component {
   state = {
-    profiles: [],
+    store: [],
   };
 
-  componentDidMount() {
-    this.setState({
-      profiles: [
-        {
-          id: "1",
-          lastname: "lastname",
-          firstname: "firstname",
-          address: "address",
-          phone: "phone",
-        },
-        {
-          id: "2",
-          lastname: "lastname",
-          firstname: "firstname",
-          address: "address",
-          phone: "phone",
-        },
-        {
-          id: "3",
-          lastname: "lastname",
-          firstname: "firstname",
-          address: "address",
-          phone: "phone",
-        },
-      ],
-    });
+  async componentDidMount() {
+    const raw = await AsyncStorage.getItem("@covid-data-share/store");
+    if (raw) {
+      const store = JSON.parse(raw);
+      this.setState({ store });
+    }
   }
 
   print = () => {};
@@ -60,7 +40,7 @@ export default class StoreScreen extends Component {
         <Text style={s.listTitle}> Stored profiles </Text>
         <SafeAreaView>
           <FlatList
-            data={this.state.profiles}
+            data={this.state.store}
             renderItem={({ item }) => <ProfileCard data={item} />}
             keyExtractor={(item) => item.id}
           />
