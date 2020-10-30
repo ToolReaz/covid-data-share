@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-community/async-storage";
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import InputField from "../components/InputField";
 import { StyledButton } from "../components/StyledButton";
@@ -36,21 +36,31 @@ export default class CreateProfileScreen extends Component {
     return (
       <View style={s.container}>
         <InputField
+          autoCompleteType="name"
+          returnKeyType="next"
           onChangeText={(lastname) => this.setState({ lastname })}
           value={this.state.lastname}
           title="Lastname"
         />
         <InputField
+          autoCompleteType="name"
+          returnKeyType="next"
           onChangeText={(firstname) => this.setState({ firstname })}
           value={this.state.firstname}
           title="Firstname"
         />
         <InputField
+          ref={this.input3}
+          autoCompleteType="tel"
+          returnKeyType="next"
+          keyboardType="phone-pad"
           onChangeText={(phone) => this.setState({ phone })}
           value={this.state.phone}
           title="Phone number"
         />
         <InputField
+          ref={this.input4}
+          autoCompleteType="street-address"
           onChangeText={(address) => this.setState({ address })}
           value={this.state.address}
           title="Address"
