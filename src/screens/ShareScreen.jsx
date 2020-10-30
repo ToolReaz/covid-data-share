@@ -18,6 +18,10 @@ export default class ShareScreen extends Component {
   };
 
   async componentDidMount() {
+    this.getData()
+  }
+
+  getData = () => {
     const raw = await AsyncStorage.getItem("@covid-data-share/profiles");
     if (raw) {
       const profiles = JSON.parse(raw);
@@ -43,6 +47,12 @@ export default class ShareScreen extends Component {
     this.setState({ showModal: false });
   };
 
+  createProfile = () => {
+    this.props.navigation.navigate("CreateProfile", {
+     onGoBack: this.getData
+    });
+  };
+
   render() {
     if (this.state.profiles.length > 0) {
       return (
@@ -62,7 +72,7 @@ export default class ShareScreen extends Component {
           <StyledButton
             text="Add one"
             type="secondary"
-            onPress={() => this.props.navigation.navigate("CreateProfile")}
+            onPress={this.createProfile}
           />
           <Text style={s.listTitle}> My profiles </Text>
           <SafeAreaView>
