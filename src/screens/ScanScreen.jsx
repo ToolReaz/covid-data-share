@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Alert, Text, View, StyleSheet } from "react-native";
 import StyledModal from "../components/StyledModal";
 import { COLORS } from "../styles/colors";
+import * as Random from "expo-random";
 
 export default function ScanScreen() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -32,9 +33,15 @@ export default function ScanScreen() {
       setScanResult(results);
       setShowModal(true);
 
+      const newProfiles = profiles.map(
+        async (p) =>
+          (p.id = (await Random.getRandomBytesAsync(8))
+            .join("")
+            .toString("hex"))
+      );
       const raw = await AsyncStorage.getItem("@covid-data-share/store");
       const store = raw ? JSON.parse(raw) : [];
-      const updatedStore = [...store, ...profiles];
+      const updatedStore = [...store, ...newProfiles];
       await AsyncStorage.setItem(
         "@covid-data-share/store",
         JSON.stringify(updatedStore)
