@@ -13,6 +13,7 @@ import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
 import * as Print from "expo-print";
 import * as Sharing from "expo-sharing";
+import * as MediaLibrary from "expo-media-library";
 
 export default class StoreScreen extends Component {
   state = {
@@ -76,7 +77,9 @@ export default class StoreScreen extends Component {
     });
 
     const { uri } = await Print.printToFileAsync({ html });
-    Sharing.shareAsync(uri);
+    const permission = await MediaLibrary.requestPermissionsAsync();
+    await MediaLibrary.saveToLibraryAsync(uri);
+    //Sharing.shareAsync(uri);
   };
 
   render() {
