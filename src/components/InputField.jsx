@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { COLORS } from "../styles/colors";
+import PropTypes from "prop-types";
 
 export default function InputField({ title, ...props }) {
   return (
@@ -37,3 +38,8 @@ const s = StyleSheet.create({
     paddingLeft: 8,
   },
 });
+
+InputField.propTypes = {
+  title: PropTypes.string.isRequired,
+  ...TextInput.PropTypes,
+};
