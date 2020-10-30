@@ -31,6 +31,8 @@ export default class ShareScreen extends Component {
     );
   };
 
+  share = () => {};
+
   render() {
     if (this.state.profiles.length > 0) {
       return (
@@ -50,6 +52,11 @@ export default class ShareScreen extends Component {
               keyExtractor={(item) => item.id}
             />
           </SafeAreaView>
+          <StyledButton
+            text="Share"
+            type="primary"
+            onPress={this.share}
+          />
         </View>
       );
     } else {
@@ -76,6 +83,7 @@ const s = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    backgroundColor: COLORS.White
   },
 
   listTitle: {
