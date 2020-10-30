@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-community/async-storage";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import React, { useState, useEffect } from "react";
 import { Alert, Text, View, StyleSheet } from "react-native";
@@ -14,9 +15,21 @@ export default function ScanScreen() {
     })();
   });
 
-  const handleScan = ({ data }) => {
+  const handleScan = async ({ data }) => {
     setScanned(true);
     Alert.alert("Scanned", data);
+
+    const profiles = JSON.parse(data);
+
+    if (typeof profiles === "object" && profiles.length > 0) {
+      const raw = await AsyncStorage.getItem("@covid-data-share/store");
+      const store = raw ? JSON.parse(raw) : [];
+      const updatedStore = [...store, ...profiles];
+      await AsyncStorage.setItem(
+        "@covid-data-share/store",
+        JSON.stringify(updatedStore)
+      );
+    }
   };
 
   if (hasPermission === null)

@@ -58,7 +58,7 @@ export default class ShareScreen extends Component {
                 </Text>
                 <QRCode
                   style={s.qrcode}
-                  value={this.state.profiles}
+                  value={JSON.stringify(this.state.profiles)}
                   size={200}
                 />
                 <Text style={s.modalText}>
