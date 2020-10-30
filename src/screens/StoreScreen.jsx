@@ -6,6 +6,7 @@ import ProfileCard from "../components/ProfileCard";
 import { StyledButton } from "../components/StyledButton";
 import { COLORS } from "../styles/colors";
 import { AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default class StoreScreen extends Component {
   state = {
