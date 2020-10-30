@@ -9,6 +9,7 @@ import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
 import QRCode from "react-native-qrcode-svg";
 import { AntDesign } from "@expo/vector-icons";
+import StyledModal from "../components/StyledModal";
 
 export default class ShareScreen extends Component {
   state = {
@@ -46,27 +47,18 @@ export default class ShareScreen extends Component {
     if (this.state.profiles.length > 0) {
       return (
         <View style={s.container}>
-          <Modal transparent visible={this.state.showModal}>
-            <View style={s.modal}>
-              <View style={s.modalInner}>
-                <Text
-                  onPress={() => this.setState({ showModal: false })}
-                  style={s.modalClose}
-                >
-                  Close
-                  <AntDesign name="close" size={20} color={COLORS.LightDark} />
-                </Text>
-                <QRCode
-                  style={s.qrcode}
-                  value={JSON.stringify(this.state.profiles)}
-                  size={200}
-                />
-                <Text style={s.modalText}>
-                  Show this QR code to the scanner
-                </Text>
-              </View>
-            </View>
-          </Modal>
+          <StyledModal
+            transparent
+            onClose={this.close}
+            show={this.state.showModal}
+          >
+            <QRCode
+              style={s.qrcode}
+              value={JSON.stringify(this.state.profiles)}
+              size={200}
+            />
+            <Text style={s.modalText}>Show this QR code to the scanner</Text>
+          </StyledModal>
           <StyledButton
             text="Add one"
             type="secondary"
