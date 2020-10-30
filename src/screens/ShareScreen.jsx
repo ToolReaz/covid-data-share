@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Alert } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileCard from "../components/ProfileCard";
@@ -21,6 +21,16 @@ export default class ShareScreen extends Component {
     }
   }
 
+  delete = async (id) => {
+    Alert.prompt(
+      "Are you sure ?",
+      `You are going to delete profile id: ${id}`,
+      () => {
+        console.log("deleted");
+      }
+    );
+  };
+
   render() {
     if (this.state.profiles.length > 0) {
       return (
@@ -34,7 +44,9 @@ export default class ShareScreen extends Component {
           <SafeAreaView>
             <FlatList
               data={this.state.profiles}
-              renderItem={({ item }) => <ProfileCard data={item} />}
+              renderItem={({ item }) => (
+                <ProfileCard onDelete={this.delete} data={item} />
+              )}
               keyExtractor={(item) => item.id}
             />
           </SafeAreaView>
