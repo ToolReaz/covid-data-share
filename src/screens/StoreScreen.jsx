@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { Alert, StyleSheet, Text, View } from "react-native";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileCard from "../components/ProfileCard";
 import { StyledButton } from "../components/StyledButton";
@@ -21,6 +21,34 @@ export default class StoreScreen extends Component {
     }
   }
 
+  delete = async (id) => {
+    const { store } = this.state;
+    const filtered = store.filter((x) => x.id != id);
+    this.setState({ store: filtered });
+    await AsyncStorage.setItem(
+      "@covid-data-share/store",
+      JSON.stringify(filtered)
+    );
+  };
+
+  clear = () => {
+    Alert.alert(
+      "Warning",
+      "Do you really want to delete all of your stored profiles ?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "OK",
+          onPress: async () => {
+            await AsyncStorage.removeItem("@covid-data-share/store");
+            this.setState({ store: [] });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   print = () => {};
 
   exportPdf = () => {};
@@ -38,11 +66,22 @@ export default class StoreScreen extends Component {
             <Text style={s.buttonText}>Export pdf</Text>
           </View>
         </View>
-        <Text style={s.listTitle}> Stored profiles </Text>
+        <View style={s.line}>
+          <Text style={s.listTitle}>Stored profiles</Text>
+          <AntDesign
+            style={s.deleteIcon}
+            name="delete"
+            size={24}
+            color={COLORS.LightDark}
+            onPress={this.clear}
+          />
+        </View>
         <SafeAreaView>
           <FlatList
             data={this.state.store}
-            renderItem={({ item }) => <ProfileCard data={item} />}
+            renderItem={({ item }) => (
+              <ProfileCard onDelete={this.delete} data={item} />
+            )}
             keyExtractor={(item) => item.id}
           />
         </SafeAreaView>
@@ -62,6 +101,11 @@ const s = StyleSheet.create({
   line: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+
+  deleteIcon: {
+    textAlignVertical: "center",
+    alignSelf: "flex-end",
   },
 
   button: {
