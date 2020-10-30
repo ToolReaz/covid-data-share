@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { Text, View, StyleSheet, Alert, Modal } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileCard from "../components/ProfileCard";
@@ -7,10 +7,13 @@ import { StyledButton } from "../components/StyledButton";
 import { COLORS } from "../styles/colors";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
+import QRCode from "react-native-qrcode-svg";
+import { AntDesign } from "@expo/vector-icons";
 
 export default class ShareScreen extends Component {
   state = {
     profiles: [],
+    showModal: false,
   };
 
   async componentDidMount() {
@@ -31,12 +34,39 @@ export default class ShareScreen extends Component {
     );
   };
 
-  share = () => {};
+  share = () => {
+    this.setState({ showModal: true });
+  };
+
+  close = () => {
+    this.setState({ showModal: false });
+  };
 
   render() {
     if (this.state.profiles.length > 0) {
       return (
         <View style={s.container}>
+          <Modal transparent visible={this.state.showModal}>
+            <View style={s.modal}>
+              <View style={s.modalInner}>
+                <Text
+                  onPress={() => this.setState({ showModal: false })}
+                  style={s.modalClose}
+                >
+                  Close
+                  <AntDesign name="close" size={20} color={COLORS.LightDark} />
+                </Text>
+                <QRCode
+                  style={s.qrcode}
+                  value={this.state.profiles}
+                  size={200}
+                />
+                <Text style={s.modalText}>
+                  Show this QR code to the scanner
+                </Text>
+              </View>
+            </View>
+          </Modal>
           <StyledButton
             text="Add one"
             type="secondary"
@@ -52,11 +82,7 @@ export default class ShareScreen extends Component {
               keyExtractor={(item) => item.id}
             />
           </SafeAreaView>
-          <StyledButton
-            text="Share"
-            type="primary"
-            onPress={this.share}
-          />
+          <StyledButton text="Share" type="primary" onPress={this.share} />
         </View>
       );
     } else {
@@ -83,7 +109,43 @@ const s = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: COLORS.White
+    backgroundColor: COLORS.White,
+  },
+
+  modal: {
+    width: "100%",
+    height: "100%",
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#00000088",
+  },
+
+  modalInner: {
+    padding: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: COLORS.White,
+    borderRadius: 24,
+    elevation: 5,
+    alignItems: "center",
+  },
+
+  modalClose: {
+    fontSize: 18,
+    fontFamily: "RobotoRegular",
+    color: COLORS.LightDark,
+    textAlign: "right",
+    textAlignVertical: "top",
+    marginBottom: 20,
+    width: "100%",
+  },
+
+  modalText: {
+    fontSize: 18,
+    fontFamily: "RobotoLight",
+    color: COLORS.LightDark,
+    textAlign: "center",
+    marginTop: 20,
   },
 
   listTitle: {
