@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+import {
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileCard from "../components/ProfileCard";
 import { StyledButton } from "../components/StyledButton";
 import { COLORS } from "../styles/colors";
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
+import * as Print from "expo-print";
+import * as Sharing from "expo-sharing";
 
 export default class StoreScreen extends Component {
   state = {
@@ -49,21 +55,50 @@ export default class StoreScreen extends Component {
     );
   };
 
-  print = () => {};
+  print = async () => {
+    const { store } = this.state;
 
-  exportPdf = () => {};
+    let html = "<h1>STORE</h1>";
+    store.forEach((p) => {
+      html += `<p>LASTNAME: ${p.lastname}  FIRSTNAME: ${p.firstname}  PHONE: ${p.phone}  ADDRESS: ${p.address}</p>`;
+    });
+
+    const { uri } = await Print.printToFileAsync({ html });
+    await Print.printAsync({ uri });
+  };
+
+  exportPdf = async () => {
+    const { store } = this.state;
+
+    let html = "<h1>STORE</h1>";
+    store.forEach((p) => {
+      html += `<p>LASTNAME: ${p.lastname}  FIRSTNAME: ${p.firstname}  PHONE: ${p.phone}  ADDRESS: ${p.address}</p>`;
+    });
+
+    const { uri } = await Print.printToFileAsync({ html });
+    Sharing.shareAsync(uri);
+  };
 
   render() {
     return (
       <View style={s.container}>
         <View style={s.line}>
-          <View style={s.button} onPress={this.print}>
-            <AntDesign name="printer" size={48} color={COLORS.Dark} />
-            <Text style={s.buttonText}>Print</Text>
+          <View style={s.button}>
+            <TouchableOpacity onPressOut={this.print}>
+              <AntDesign name="printer" size={48} color={COLORS.Dark} />
+              <Text style={s.buttonText}>Print</Text>
+            </TouchableOpacity>
           </View>
-          <View style={[s.button, { marginLeft: 16 }]} onPress={this.exportPdf}>
-            <AntDesign name="pdffile1" size={48} color={COLORS.Dark} />
-            <Text style={s.buttonText}>Export pdf</Text>
+          <View style={[s.button, { marginLeft: 16 }]}>
+            <TouchableOpacity onPressOut={this.exportPdf}>
+              <AntDesign
+                name="pdffile1"
+                style={{ textAlign: "center" }}
+                size={48}
+                color={COLORS.Dark}
+              />
+              <Text style={s.buttonText}>Export pdf</Text>
+            </TouchableOpacity>
           </View>
         </View>
         <View style={s.line}>
