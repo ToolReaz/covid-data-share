@@ -22,32 +22,66 @@ export default function ScanScreen() {
   const handleScan = async ({ data }) => {
     setScanned(true);
 
-    const profiles = JSON.parse(data);
+    try {
+      const profiles = JSON.parse(data);
 
-    if (typeof profiles === "object" && profiles.length > 0) {
-      const results = profiles.map((r) => (
-        <Text key={r.id} style={s.resultText}>
-          {r.lastname.toUpperCase()} {r.firstname}
-        </Text>
-      ));
-      setScanResult(results);
-      setShowModal(true);
+      if (profiles && typeof profiles === "object" && profiles.length > 0) {
+        if (
+          "id" in profiles[0] &&
+          "lastname" in profiles[0] &&
+          "firstname" in profiles[0] &&
+          "phone" in profiles[0] &&
+          "address" in profiles[0]
+        ) {
+          const results = profiles.map((r) => (
+            <Text key={r.id} style={s.resultText}>
+              {r.lastname.toUpperCase()} {r.firstname}
+            </Text>
+          ));
 
-      const newProfiles = profiles.map(
-        async (p) =>
-          (p.id = (await Random.getRandomBytesAsync(8))
-            .join("")
-            .toString("hex"))
+          const newProfiles = await Promise.all(
+            profiles.map(async (p) => {
+              p.id = (await Random.getRandomBytesAsync(8))
+                .join("")
+                .toString("hex");
+              return p;
+            })
+          );
+
+          const raw = await AsyncStorage.getItem("@covid-data-share/store");
+          const store = raw ? JSON.parse(raw) : [];
+          const updatedStore = [...store, ...newProfiles];
+          await AsyncStorage.setItem(
+            "@covid-data-share/store",
+            JSON.stringify(updatedStore)
+          );
+
+          setScanResult(results);
+          setShowModal(true);
+        } else {
+          Alert.alert(
+            "Error",
+            "This QR code is not meant to be scanned by this app !",
+            [
+              {
+                text: "OK",
+                onPress: () => setScanned(false),
+              },
+            ]
+          );
+        }
+      }
+    } catch (e) {
+      Alert.alert(
+        "Error",
+        "This QR code is not meant to be scanned by this app !",
+        [
+          {
+            text: "OK",
+            onPress: () => setScanned(false),
+          },
+        ]
       );
-      const raw = await AsyncStorage.getItem("@covid-data-share/store");
-      const store = raw ? JSON.parse(raw) : [];
-      const updatedStore = [...store, ...newProfiles];
-      await AsyncStorage.setItem(
-        "@covid-data-share/store",
-        JSON.stringify(updatedStore)
-      );
-
-      setScanned(false);
     }
   };
 
@@ -59,7 +93,13 @@ export default function ScanScreen() {
 
   return (
     <View style={s.container}>
-      <StyledModal show={showModal} onClose={() => setShowModal(false)}>
+      <StyledModal
+        show={showModal}
+        onClose={() => {
+          setShowModal(false);
+          setScanned(false);
+        }}
+      >
         <Text style={s.modalTitle}>You scanned:</Text>
         <Text>{scanResult}</Text>
       </StyledModal>
