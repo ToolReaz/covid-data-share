@@ -3,10 +3,13 @@ import { Button, StyleSheet, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLORS } from "../styles/colors";
 
-export function StyledButton({ type, text, onPress }) {
+export function StyledButton({ type, text, onPress, style }) {
   const color = type == "primary" ? COLORS.Primary : COLORS.Dark;
   return (
-    <TouchableOpacity style={{ backgroundColor: color }} onPress={onPress}>
+    <TouchableOpacity
+      style={{ backgroundColor: color, ...style }}
+      onPress={onPress}
+    >
       <Text style={s.text}>{text}</Text>
     </TouchableOpacity>
   );
