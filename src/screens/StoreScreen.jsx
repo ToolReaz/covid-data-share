@@ -14,6 +14,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import * as Print from "expo-print";
 import * as Sharing from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
+import { t } from "i18n-js";
 
 export default class StoreScreen extends Component {
   state = {
@@ -89,7 +90,7 @@ export default class StoreScreen extends Component {
           <View style={s.button}>
             <TouchableOpacity onPressOut={this.print}>
               <AntDesign name="printer" size={48} color={COLORS.Dark} />
-              <Text style={s.buttonText}>Print</Text>
+              <Text style={s.buttonText}>{t("PRINT")}</Text>
             </TouchableOpacity>
           </View>
           <View style={[s.button, { marginLeft: 16 }]}>
@@ -100,12 +101,12 @@ export default class StoreScreen extends Component {
                 size={48}
                 color={COLORS.Dark}
               />
-              <Text style={s.buttonText}>Export pdf</Text>
+              <Text style={s.buttonText}>{t("EXPORT_PDF")}</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={s.line}>
-          <Text style={s.listTitle}>Stored profiles</Text>
+          <Text style={s.listTitle}>{t("STORED_PROFILES")}</Text>
           <AntDesign
             style={s.deleteIcon}
             name="delete"
@@ -123,7 +124,7 @@ export default class StoreScreen extends Component {
             keyExtractor={(item) => item.id}
           />
         </SafeAreaView>
-        <StyledButton text="Select all" type="secondary" />
+        <StyledButton text={t("SELECT_ALL")} type="secondary" />
       </View>
     );
   }

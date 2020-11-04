@@ -8,7 +8,6 @@ export default function InputField({ title, ...props }) {
     <View style={s.container}>
       <Text style={s.title}>{title}</Text>
       <TextInput
-        placeholder="Placeholder"
         placeholderTextColor={COLORS.LightDark}
         selectionColor={COLORS.LightDark}
         style={s.input}

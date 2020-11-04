@@ -10,7 +10,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import QRCode from "react-native-qrcode-svg";
 import { AntDesign } from "@expo/vector-icons";
 import StyledModal from "../components/StyledModal";
-import { t } from "i18n-js";
+import { t } from "../i18n/i18n";
 
 export default class ShareScreen extends Component {
   state = {
@@ -71,11 +71,11 @@ export default class ShareScreen extends Component {
             <Text style={s.modalText}>Show this QR code to the scanner</Text>
           </StyledModal>
           <StyledButton
-            text="Add one"
+            text={t("ADD")}
             type="secondary"
             onPress={this.createProfile}
           />
-          <Text style={s.listTitle}> My profiles </Text>
+          <Text style={s.listTitle}>{t("MY_PROFILES")}</Text>
           <SafeAreaView>
             <FlatList
               data={this.state.profiles}
@@ -85,7 +85,7 @@ export default class ShareScreen extends Component {
               keyExtractor={(item) => item.id}
             />
           </SafeAreaView>
-          <StyledButton text="Share" type="primary" onPress={this.share} />
+          <StyledButton text={t("SHARE")} type="primary" onPress={this.share} />
         </View>
       );
     } else {

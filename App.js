@@ -9,6 +9,7 @@ import ScanScreen from "./src/screens/ScanScreen";
 import CreateProfileScreen from "./src/screens/CreateProfileScreen";
 import SplashScreen from "./src/screens/SplashScreen";
 import { COLORS } from "./src/styles/colors";
+import { t } from "i18n-js";
 
 const Stack = createStackNavigator();
 
@@ -55,11 +56,23 @@ export default function App() {
           name="Home"
           component={HomeScreen}
         />
-        <Stack.Screen name="Share" component={ShareScreen} />
-        <Stack.Screen name="Scan" component={ScanScreen} />
-        <Stack.Screen name="Store" component={StoreScreen} />
         <Stack.Screen
-          options={{ title: "Create new profile" }}
+          name="Share"
+          options={{ title: t("S_SHARE") }}
+          component={ShareScreen}
+        />
+        <Stack.Screen
+          name="Scan"
+          options={{ title: t("S_SCAN") }}
+          component={ScanScreen}
+        />
+        <Stack.Screen
+          name="Store"
+          options={{ title: t("S_STORE") }}
+          component={StoreScreen}
+        />
+        <Stack.Screen
+          options={{ title: t("S_CREATE_PROFILE") }}
           name="CreateProfile"
           component={CreateProfileScreen}
         />
