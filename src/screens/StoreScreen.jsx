@@ -41,8 +41,8 @@ export default class StoreScreen extends Component {
 
   clear = () => {
     Alert.alert(
-      "Warning",
-      "Do you really want to delete all of your stored profiles ?",
+      t("WARNING"),
+      t("DELETE_CONFIRM"),
       [
         { text: "Cancel", style: "cancel" },
         {

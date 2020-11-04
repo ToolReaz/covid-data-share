@@ -6,6 +6,7 @@ export const en = {
 
   // General
   ERROR: "Error",
+  WARNING: "Warning",
   MY_PROFILES: "My profiles",
   ADD: "Add",
   SHARE: "Share",
@@ -23,7 +24,7 @@ export const en = {
   NO_PERM: "No access to camera.",
   PUT_QRCODE: "Put the QR code in front of the camera",
   SCANNING: "Scanning...",
-  YOU_SCANNED: "You scanned:",
+  YOU_SCANNED: "You scanned",
 
   // Share screen
   // ---
@@ -33,6 +34,7 @@ export const en = {
   EXPORT_PDF: "Export pdf",
   STORED_PROFILES: "Stored profiles",
   SELECT_ALL: "Select all",
+  DELETE_CONFIRM: "Do you really want to delete all of your stored profiles ?",
 
   // Create profile screen
   LASTNAME: "Lastname",
