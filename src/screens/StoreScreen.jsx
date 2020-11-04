@@ -89,7 +89,12 @@ export default class StoreScreen extends Component {
         <View style={s.line}>
           <View style={s.button}>
             <TouchableOpacity onPressOut={this.print}>
-              <AntDesign name="printer" size={48} color={COLORS.Dark} />
+              <AntDesign
+                name="printer"
+                style={{ textAlign: "center" }}
+                size={48}
+                color={COLORS.Dark}
+              />
               <Text style={s.buttonText}>{t("PRINT")}</Text>
             </TouchableOpacity>
           </View>
