@@ -15,7 +15,7 @@ export default class HomeScreen extends Component {
         <View style={s.container}>
           <View style={s.topLinksView}>
             <View>
-              <Text style={s.title}>APP NAME</Text>
+              <Text style={s.title}>CODASHR</Text>
               <View style={s.underline}></View>
             </View>
             <View
