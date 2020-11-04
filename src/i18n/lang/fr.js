@@ -7,7 +7,7 @@ export const fr = {
   // General
   ERROR: "Erreur",
   WARNING: "Attention",
-  MY_PROFILES: "Mes profiles",
+  MY_PROFILES: "Mes profils",
   ADD: "Ajouter",
   SHARE: "Partager",
   CREATE: "Créer",
@@ -16,7 +16,7 @@ export const fr = {
   S_SHARE: "Partager",
   S_SCAN: "Collecter",
   S_STORE: "Stockage",
-  S_CREATE_PROFILE: "Créer nouveau profile",
+  S_CREATE_PROFILE: "Créer nouveau profil",
 
   // Scan Screen
   WRONG_QRCODE: "Ce code QR n'est pas conçu pour cette application !",
@@ -28,7 +28,7 @@ export const fr = {
 
   // Share screen
   NO_PROFILE: "Vous n'avez pas encore saisi d'informations.",
-  TAP_HERE: "Appuyer pour créer votre premier profile.",
+  TAP_HERE: "Appuyer pour créer votre premier profil.",
 
   // Store screen
   PRINT: "Imprimer",
@@ -36,12 +36,12 @@ export const fr = {
   STORED_PROFILES: "Profiles enregistrés",
   SELECT_ALL: "Tout sélectionner",
   DELETE_CONFIRM:
-    "Voulez vous vraiment supprimer tout vos profiles enregistrés ?",
+    "Voulez vous vraiment supprimer tout vos profils enregistrés ?",
 
   // Create profile screen
   LASTNAME: "Nom de famille",
   FIRSTNAME: "Prénom",
   PHONE: "Numéro de téléphone",
   ADDRESS: "Adresse",
-  ALL_FIELDS_REQUIRED: "Tous les champs sont requies !",
+  ALL_FIELDS_REQUIRED: "Tous les champs sont requis !",
 };
