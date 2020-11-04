@@ -5,8 +5,10 @@ import { Alert, Text, View, StyleSheet } from "react-native";
 import StyledModal from "../components/StyledModal";
 import { COLORS } from "../styles/colors";
 import * as Random from "expo-random";
+import { withI18n } from "../i18n/i18n";
+import { t } from "i18n-js";
 
-export default function ScanScreen() {
+const ScanScreen = function (props) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -86,10 +88,10 @@ export default function ScanScreen() {
   };
 
   if (hasPermission === null)
-    return <Text style={s.text}>Requesting ccamera permission...</Text>;
+    return <Text style={s.text}>{t("REQUESTING_PERM")}</Text>;
 
   if (hasPermission === false)
-    return <Text style={s.text}>No access to camera.</Text>;
+    return <Text style={s.text}>{t("NO_PERM")}</Text>;
 
   return (
     <View style={s.container}>
@@ -100,18 +102,20 @@ export default function ScanScreen() {
           setScanned(false);
         }}
       >
-        <Text style={s.modalTitle}>You scanned:</Text>
+        <Text style={s.modalTitle}>{t("YOU_SCANNED")}:</Text>
         <Text>{scanResult}</Text>
       </StyledModal>
-      <Text style={s.text}>Put the QR code in front of the camera</Text>
+      <Text style={s.text}>{t("PUT_QRCODE")}</Text>
       <BarCodeScanner
         style={s.scanner}
         onBarCodeScanned={scanned ? undefined : handleScan}
       />
-      <Text style={s.text}>Scanning...</Text>
+      <Text style={s.text}>{t("SCANNING")}</Text>
     </View>
   );
-}
+};
+
+export default ScanScreen;
 
 const s = StyleSheet.create({
   container: {

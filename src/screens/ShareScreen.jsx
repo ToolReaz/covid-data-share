@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import QRCode from "react-native-qrcode-svg";
 import { AntDesign } from "@expo/vector-icons";
 import StyledModal from "../components/StyledModal";
+import { t } from "i18n-js";
 
 export default class ShareScreen extends Component {
   state = {
@@ -18,16 +19,16 @@ export default class ShareScreen extends Component {
   };
 
   async componentDidMount() {
-    this.getData()
+    await this.getData();
   }
 
-  getData = () => {
+  getData = async () => {
     const raw = await AsyncStorage.getItem("@covid-data-share/profiles");
     if (raw) {
       const profiles = JSON.parse(raw);
       this.setState({ profiles });
     }
-  }
+  };
 
   delete = async (id) => {
     const { profiles } = this.state;
@@ -49,7 +50,7 @@ export default class ShareScreen extends Component {
 
   createProfile = () => {
     this.props.navigation.navigate("CreateProfile", {
-     onGoBack: this.getData
+      onGoBack: this.getData,
     });
   };
 

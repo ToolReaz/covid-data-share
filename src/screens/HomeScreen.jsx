@@ -5,6 +5,7 @@ import { EvilIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { COLORS } from "./../styles/colors";
+import { t } from "i18n-js";
 
 export default class HomeScreen extends Component {
   render() {
@@ -22,7 +23,9 @@ export default class HomeScreen extends Component {
               onTouchStart={() => this.props.navigation.navigate("Share")}
             >
               <EvilIcons name="share-apple" size={200} color={COLORS.Dark} />
-              <Text style={[s.subtitle, { color: COLORS.Dark }]}>Share</Text>
+              <Text style={[s.subtitle, { color: COLORS.Dark }]}>
+                {t("SHARE_BTN")}
+              </Text>
             </View>
           </View>
           <View style={s.bottomLinksView}>
@@ -31,7 +34,9 @@ export default class HomeScreen extends Component {
               onTouchStart={() => this.props.navigation.navigate("Store")}
             >
               <Feather name="database" size={128} color={COLORS.White} />
-              <Text style={[s.subtitle, { color: COLORS.White }]}>Store</Text>
+              <Text style={[s.subtitle, { color: COLORS.White }]}>
+                {t("STORE_BTN")}
+              </Text>
             </View>
             <View
               style={s.linkView}
@@ -42,7 +47,9 @@ export default class HomeScreen extends Component {
                 size={128}
                 color={COLORS.White}
               />
-              <Text style={[s.subtitle, { color: COLORS.White }]}>Collect</Text>
+              <Text style={[s.subtitle, { color: COLORS.White }]}>
+                {t("COLLECT_BTN")}
+              </Text>
             </View>
           </View>
         </View>
