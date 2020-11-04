@@ -27,7 +27,8 @@ export const fr = {
   YOU_SCANNED: "Vous avez scanner",
 
   // Share screen
-  // ---
+  NO_PROFILE: "Vous n'avez pas encore saisi d'informations.",
+  TAP_HERE: "Appuyer pour créer votre premier profile.",
 
   // Store screen
   PRINT: "Imprimer",

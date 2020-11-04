@@ -27,7 +27,8 @@ export const en = {
   YOU_SCANNED: "You scanned",
 
   // Share screen
-  // ---
+  NO_PROFILE: "You didn't provided any information.",
+  TAP_HERE: "Tap to create a new information profile.",
 
   // Store screen
   PRINT: "Print",

@@ -91,7 +91,7 @@ export default class ShareScreen extends Component {
     } else {
       return (
         <View style={s.nodataContainer}>
-          <Text style={s.nodataText}>You didn't provided any information.</Text>
+          <Text style={s.nodataText}>{t("NO_PROFILE")}</Text>
           <Feather
             name="edit"
             size={128}
@@ -99,9 +99,7 @@ export default class ShareScreen extends Component {
             color={COLORS.LightDark}
             onPress={() => this.props.navigation.navigate("CreateProfile")}
           />
-          <Text style={s.nodataText}>
-            Tap to create a new information profile.
-          </Text>
+          <Text style={s.nodataText}>{t("TAP_HERE")}</Text>
         </View>
       );
     }
