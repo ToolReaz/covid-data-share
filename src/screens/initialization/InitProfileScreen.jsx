@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View, Animated } from "react-native";
 import { t } from "../../i18n/i18n";
 import { COLORS } from "../../styles/colors";
 import InputField from "../../components/InputField";
@@ -7,14 +7,37 @@ import { StyledButton } from "../../components/StyledButton";
 import AsyncStorage from "@react-native-community/async-storage";
 import * as Random from "expo-random";
 
-
 export default class InitProfileScreen extends Component {
   state = {
     lastname: "",
     firstname: "",
     phone: "",
     address: "",
+    titleFade: new Animated.Value(0),
+    fieldsFade: new Animated.Value(0),
+    buttonFade: new Animated.Value(0),
   };
+
+  componentDidMount() {
+    Animated.sequence([
+      Animated.delay(2000),
+      Animated.timing(this.state.titleFade, {
+        toValue: 1,
+        duration: 2000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(this.state.fieldsFade, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(this.state.buttonFade, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }
 
   create = async () => {
     const { lastname, firstname, phone, address } = this.state;
@@ -38,11 +61,11 @@ export default class InitProfileScreen extends Component {
   render() {
     return (
       <View style={s.container}>
-        <View style={s.top}>
+        <Animated.View style={[s.top, { opacity: this.state.titleFade }]}>
           <Text style={s.title}>{t("YOUR_PROFILE")}</Text>
           <View style={s.underline}></View>
-        </View>
-        <View s={s.fields}>
+        </Animated.View>
+        <Animated.View style={{ opacity: this.state.fieldsFade }}>
           <InputField
             autoCompleteType="name"
             returnKeyType="next"
@@ -73,14 +96,14 @@ export default class InitProfileScreen extends Component {
             value={this.state.address}
             title={t("ADDRESS")}
           />
-        </View>
-        <View style={s.btn}>
+        </Animated.View>
+        <Animated.View style={{ opacity: this.state.buttonFade }}>
           <StyledButton
             text={t("CREATE")}
             type="primary"
             onPress={this.create}
           />
-        </View>
+        </Animated.View>
       </View>
     );
   }

@@ -1,44 +1,54 @@
-import React, { Component, useRef, createRef } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { Component } from "react";
+import { StyleSheet, Text, View, Animated } from "react-native";
 import { StyledButton } from "../../components/StyledButton";
 import { t } from "../../i18n/i18n";
 import { COLORS } from "../../styles/colors";
 import { AntDesign } from "@expo/vector-icons";
-import Animated from "react-native-reanimated";
 
 export default class InitWelcomeScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fadeAnim: new Animated.Value(0),
-    };
-  }
+  state = {
+    titleFade: new Animated.Value(0),
+    textFade: new Animated.Value(0),
+    buttonFade: new Animated.Value(0),
+  };
 
   componentDidMount() {
-    this.fadeIn();
+    Animated.sequence([
+      Animated.delay(2000),
+      Animated.timing(this.state.titleFade, {
+        toValue: 1,
+        duration: 3000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(this.state.textFade, {
+        toValue: 1,
+        duration: 3000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(this.state.buttonFade, {
+        toValue: 1,
+        duration: 3000,
+        useNativeDriver: true,
+      }),
+    ]).start();
   }
-
-  fadeIn = () => {
-    Animated.timing(this.state.fadeAnim, {
-      toValue: 1,
-      duration: 5000,
-    }).start();
-  };
 
   render() {
     return (
       <View style={s.container}>
-        <View style={s.topContainer}>
+        <Animated.View
+          style={[s.topContainer, { opacity: this.state.titleFade }]}
+        >
           <Text style={s.title}>{t("WELCOME")}</Text>
           <Text style={s.on}>{t("ON")}</Text>
           <Text style={s.title}>CODASH</Text>
           <View style={s.underline}></View>
-        </View>
+        </Animated.View>
         <View style={s.botContainer}>
-          <Animated.View style={{ opacity: this.state.fadeAnim }}>
+          <Animated.View style={{ opacity: this.state.textFade }}>
             <Text style={s.text}>{t("INIT_START")}</Text>
           </Animated.View>
-          <View style={s.btn}>
+          <Animated.View style={[s.btn, { opacity: this.state.buttonFade }]}>
             <StyledButton
               onPress={() => this.props.navigation.navigate("Init2")}
               text={
@@ -49,7 +59,7 @@ export default class InitWelcomeScreen extends Component {
               }
               type="primary"
             />
-          </View>
+          </Animated.View>
         </View>
       </View>
     );

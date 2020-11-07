@@ -1,12 +1,39 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Animated } from "react-native";
 import { StyledButton } from "../../components/StyledButton";
 import { t } from "../../i18n/i18n";
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../styles/colors";
 
 export default class InitEndScreen extends Component {
+  state = {
+    titleFade: new Animated.Value(0),
+    textFade: new Animated.Value(0),
+    buttonFade: new Animated.Value(0),
+  };
+
+  componentDidMount() {
+    Animated.sequence([
+      Animated.delay(300),
+      Animated.timing(this.state.titleFade, {
+        toValue: 1,
+        duration: 2000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(this.state.textFade, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(this.state.buttonFade, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }
+
   end = async () => {
     await AsyncStorage.setItem("@covid-data-share/isAppInited", "true");
     this.props.navigation.navigate("Init1");
@@ -15,12 +42,14 @@ export default class InitEndScreen extends Component {
   render() {
     return (
       <View style={s.container}>
-        <View style={s.top}>
+        <Animated.View style={{ opacity: this.state.titleFade }}>
           <Text style={s.title}>{t("CONGRAT")}</Text>
           <View style={s.underline}></View>
-        </View>
-        <Text style={s.text}>{t("INIT_FINISH")}</Text>
-        <View style={s.bot}>
+        </Animated.View>
+        <Animated.Text style={[s.text, { opacity: this.state.textFade }]}>
+          {t("INIT_FINISH")}
+        </Animated.Text>
+        <Animated.View style={{ opacity: this.state.buttonFade }}>
           <StyledButton
             onPress={this.end}
             text={
@@ -31,7 +60,7 @@ export default class InitEndScreen extends Component {
             }
             type="primary"
           />
-        </View>
+        </Animated.View>
       </View>
     );
   }
