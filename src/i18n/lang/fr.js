@@ -1,4 +1,19 @@
 export const fr = {
+  // Init screens
+  WELCOME: "Bienvenue !",
+  ON: "sur",
+  INIT_START:
+    "Laissez nous vous guider pour votre première utilisation de l'application !",
+  BEGIN: "Commencer",
+  ARE_YOU: "Êtes vous",
+  CLIENT: "Client",
+  WORKER: "Restaurateur",
+  YOUR_PROFILE: "VOTRE PROFIL",
+  CONGRAT: "Félicitation !",
+  INIT_FINISH:
+    "Vous avez terminer de configurer l'application. Vous pouvez dès à présent commencer à l'utiliser.",
+  LETS_GO: "C'est parti",
+
   // Home Screen
   SHARE_BTN: "Partager",
   STORE_BTN: "Stockage",

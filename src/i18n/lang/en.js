@@ -1,4 +1,18 @@
 export const en = {
+  // Init screens
+  WELCOME: "Welcome !",
+  ON: "on",
+  INIT_START: "Let us guide you through you first configuration fo the app !",
+  BEGIN: "Begin",
+  ARE_YOU: "Are you",
+  CLIENT: "Client",
+  WORKER: "Worker",
+  YOUR_PROFILE: "YOUR PROFILE",
+  CONGRAT: "Congratulation !",
+  INIT_FINISH:
+    "You finished configuring the application. Now you can start using it.",
+  LETS_GO: "Let's go",
+
   // Home Screen
   SHARE_BTN: "Share",
   STORE_BTN: "Store",
