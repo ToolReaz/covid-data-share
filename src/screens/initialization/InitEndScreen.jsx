@@ -34,9 +34,8 @@ export default class InitEndScreen extends Component {
     ]).start();
   }
 
-  end = async () => {
-    await AsyncStorage.setItem("@covid-data-share/isAppInited", "true");
-    this.props.navigation.navigate("Init1");
+  end = () => {
+    this.context.setInited();
   };
 
   render() {
