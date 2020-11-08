@@ -11,11 +11,12 @@ import SplashScreen from "./src/screens/SplashScreen";
 import { COLORS } from "./src/styles/colors";
 import { t } from "i18n-js";
 import InitWelcomeScreen from "./src/screens/initialization/InitWelcomeScreen";
-import AsyncStorage from "@react-native-community/async-storage";
 import InitChoiceScreen from "./src/screens/initialization/InitChoiceScreen";
 import InitProfileScreen from "./src/screens/initialization/InitProfileScreen";
 import InitEndScreen from "./src/screens/initialization/InitEndScreen";
 import * as SQLite from "expo-sqlite";
+import { Provider, useStore } from "react-redux";
+import { store } from "./src/redux/store";
 
 const Stack = createStackNavigator();
 
@@ -111,14 +112,16 @@ export default function App() {
     : { header: () => null };
 
   return (
-    <NavigationContainer theme={{ colors: { background: COLORS.White } }}>
-      <Stack.Navigator
-        initialRouteName="Home"
-        mode="card"
-        screenOptions={screenOptions}
-      >
-        {isInit ? AppStack : InitStack}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer theme={{ colors: { background: COLORS.White } }}>
+        <Stack.Navigator
+          initialRouteName="Home"
+          mode="card"
+          screenOptions={screenOptions}
+        >
+          {isInit ? AppStack : InitStack}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
