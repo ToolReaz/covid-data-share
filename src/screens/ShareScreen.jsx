@@ -11,6 +11,7 @@ import QRCode from "react-native-qrcode-svg";
 import { AntDesign } from "@expo/vector-icons";
 import StyledModal from "../components/StyledModal";
 import { t } from "../i18n/i18n";
+import { mainStyle } from "../styles/mainStyle";
 
 export default class ShareScreen extends Component {
   state = {
@@ -68,14 +69,14 @@ export default class ShareScreen extends Component {
               value={JSON.stringify(this.state.profiles)}
               size={200}
             />
-            <Text style={s.modalText}>Show this QR code to the scanner</Text>
+            <Text style={mainStyle.text}>Show this QR code to the scanner</Text>
           </StyledModal>
           <StyledButton
             text={t("ADD")}
             type="secondary"
             onPress={this.createProfile}
           />
-          <Text style={s.listTitle}>{t("MY_PROFILES")}</Text>
+          <Text style={mainStyle.listTitle}>{t("MY_PROFILES")}</Text>
           <SafeAreaView>
             <FlatList
               data={this.state.profiles}
@@ -91,7 +92,7 @@ export default class ShareScreen extends Component {
     } else {
       return (
         <View style={s.nodataContainer}>
-          <Text style={s.nodataText}>{t("NO_PROFILE")}</Text>
+          <Text style={mainStyle.iconTitle}>{t("NO_PROFILE")}</Text>
           <Feather
             name="edit"
             size={128}
@@ -99,7 +100,7 @@ export default class ShareScreen extends Component {
             color={COLORS.LightDark}
             onPress={() => this.props.navigation.navigate("CreateProfile")}
           />
-          <Text style={s.nodataText}>{t("TAP_HERE")}</Text>
+          <Text style={mainStyle.iconTitle}>{t("TAP_HERE")}</Text>
         </View>
       );
     }
@@ -130,43 +131,10 @@ const s = StyleSheet.create({
     alignItems: "center",
   },
 
-  modalClose: {
-    fontSize: 18,
-    fontFamily: "RobotoRegular",
-    color: COLORS.LightDark,
-    textAlign: "right",
-    textAlignVertical: "top",
-    marginBottom: 20,
-    width: "100%",
-  },
-
-  modalText: {
-    fontSize: 18,
-    fontFamily: "RobotoLight",
-    color: COLORS.LightDark,
-    textAlign: "center",
-    marginTop: 20,
-  },
-
-  listTitle: {
-    fontFamily: "RobotoLight",
-    fontSize: 18,
-    color: COLORS.LightDark,
-    marginTop: 20,
-  },
-
   nodataContainer: {
     flex: 1,
     padding: 16,
     justifyContent: "space-around",
-  },
-
-  nodataText: {
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 24,
-    fontFamily: "RobotoMedium",
-    color: COLORS.Dark,
   },
 
   nodataIcon: {

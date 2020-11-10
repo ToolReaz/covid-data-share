@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { material, systemWeights } from "react-native-typography";
 import { COLORS } from "../styles/colors";
 
 export default function ProfileCard({ data, onDelete }) {
@@ -28,23 +29,22 @@ const s = StyleSheet.create({
     flexDirection: "row",
   },
   lastname: {
+    ...material.title,
     color: COLORS.Primary,
-    fontSize: 18,
-    fontFamily: "RobotoRegular",
   },
   firstname: {
+    ...material.subheading,
+    ...systemWeights.light,
     color: COLORS.Primary,
-    fontSize: 16,
-    fontFamily: "RobotoLight",
   },
   address: {
+    ...material.body1,
+    ...systemWeights.thin,
     color: COLORS.LightDark,
-    fontSize: 14,
-    fontFamily: "RobotoThin",
   },
   phone: {
+    ...material.body1,
+    ...systemWeights.thin,
     color: COLORS.LightDark,
-    fontSize: 14,
-    fontFamily: "RobotoThin",
   },
 });

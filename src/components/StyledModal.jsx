@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Modal, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../styles/colors";
+import { material, systemWeights } from "react-native-typography";
 
 export default function StyledModal({ show, onClose, children }) {
   return (
@@ -39,20 +40,12 @@ const s = StyleSheet.create({
   },
 
   modalClose: {
-    fontSize: 18,
-    fontFamily: "RobotoRegular",
+    ...material.title,
+    ...systemWeights.regular,
     color: COLORS.LightDark,
     textAlign: "right",
     textAlignVertical: "top",
     marginBottom: 20,
     width: "100%",
-  },
-
-  modalText: {
-    fontSize: 18,
-    fontFamily: "RobotoLight",
-    color: COLORS.LightDark,
-    textAlign: "center",
-    marginTop: 20,
   },
 });

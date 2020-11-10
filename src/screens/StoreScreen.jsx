@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
-import {
-  FlatList,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileCard from "../components/ProfileCard";
 import { StyledButton } from "../components/StyledButton";
@@ -15,6 +11,7 @@ import * as Print from "expo-print";
 import * as Sharing from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
 import { t } from "i18n-js";
+import { mainStyle } from "../styles/mainStyle";
 
 export default class StoreScreen extends Component {
   state = {
@@ -95,7 +92,7 @@ export default class StoreScreen extends Component {
                 size={48}
                 color={COLORS.Dark}
               />
-              <Text style={s.buttonText}>{t("PRINT")}</Text>
+              <Text style={mainStyle.iconTitleLD}>{t("PRINT")}</Text>
             </TouchableOpacity>
           </View>
           <View style={[s.button, { marginLeft: 16 }]}>
@@ -106,12 +103,12 @@ export default class StoreScreen extends Component {
                 size={48}
                 color={COLORS.Dark}
               />
-              <Text style={s.buttonText}>{t("EXPORT_PDF")}</Text>
+              <Text style={mainStyle.iconTitleLD}>{t("EXPORT_PDF")}</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={s.line}>
-          <Text style={s.listTitle}>{t("STORED_PROFILES")}</Text>
+          <Text style={mainStyle.listTitle}>{t("STORED_PROFILES")}</Text>
           <AntDesign
             style={s.deleteIcon}
             name="delete"
@@ -159,19 +156,5 @@ const s = StyleSheet.create({
     borderWidth: 3,
     paddingTop: 10,
     paddingBottom: 10,
-  },
-
-  buttonText: {
-    textAlign: "center",
-    fontSize: 20,
-    fontFamily: "RobotoMedium",
-    color: COLORS.LightDark,
-  },
-
-  listTitle: {
-    fontFamily: "RobotoLight",
-    fontSize: 18,
-    color: COLORS.LightDark,
-    marginTop: 20,
   },
 });

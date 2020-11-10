@@ -17,6 +17,7 @@ import InitEndScreen from "./screens/initialization/InitEndScreen";
 import * as SQLite from "expo-sqlite";
 import { useRecoilState } from "recoil";
 import { metaDataState } from "./store/atoms/metaDataState";
+import { material } from "react-native-typography";
 
 const Stack = createStackNavigator();
 
@@ -104,14 +105,11 @@ export default function App() {
           borderBottomWidth: 2,
         },
         headerTintColor: COLORS.White,
-        headerTitleStyle: {
-          fontFamily: "RobotoMedium",
-          fontSize: 24,
-        },
+        headerTitleStyle: { ...material.headline, color: COLORS.White },
       }
     : { header: () => null };
 
-    console.log(isInit)
+  console.log(isInit);
 
   return (
     <NavigationContainer theme={{ colors: { background: COLORS.White } }}>

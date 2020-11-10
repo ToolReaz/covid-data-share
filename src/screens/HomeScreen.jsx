@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { ImageBackground, Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import BackgroundSvg from "../components/BackgroundSvg";
 import { EvilIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { COLORS } from "./../styles/colors";
 import { t } from "i18n-js";
+import { mainStyle } from "../styles/mainStyle";
 
 export default class HomeScreen extends Component {
   render() {
@@ -15,17 +16,15 @@ export default class HomeScreen extends Component {
         <View style={s.container}>
           <View style={s.topLinksView}>
             <View>
-              <Text style={s.title}>CODASH</Text>
-              <View style={s.underline}></View>
+              <Text style={mainStyle.title}>CODASH</Text>
+              <View style={mainStyle.underline}></View>
             </View>
             <View
               style={s.linkView}
               onTouchStart={() => this.props.navigation.navigate("Share")}
             >
               <EvilIcons name="share-apple" size={200} color={COLORS.Dark} />
-              <Text style={[s.subtitle, { color: COLORS.Dark }]}>
-                {t("SHARE_BTN")}
-              </Text>
+              <Text style={[mainStyle.iconTitle]}>{t("SHARE_BTN")}</Text>
             </View>
           </View>
           <View style={s.bottomLinksView}>
@@ -34,7 +33,7 @@ export default class HomeScreen extends Component {
               onTouchStart={() => this.props.navigation.navigate("Store")}
             >
               <Feather name="database" size={128} color={COLORS.White} />
-              <Text style={[s.subtitle, { color: COLORS.White }]}>
+              <Text style={[mainStyle.iconTitle, { color: COLORS.White }]}>
                 {t("STORE_BTN")}
               </Text>
             </View>
@@ -47,7 +46,7 @@ export default class HomeScreen extends Component {
                 size={128}
                 color={COLORS.White}
               />
-              <Text style={[s.subtitle, { color: COLORS.White }]}>
+              <Text style={[mainStyle.iconTitle, { color: COLORS.White }]}>
                 {t("COLLECT_BTN")}
               </Text>
             </View>
@@ -64,26 +63,6 @@ const s = StyleSheet.create({
     height: "100%",
     flex: 1,
     position: "absolute",
-  },
-
-  title: {
-    fontSize: 36,
-    fontFamily: "RobotoLight",
-    color: COLORS.Dark,
-    textAlign: "center",
-  },
-
-  underline: {
-    width: "20%",
-    alignSelf: "center",
-    borderTopColor: COLORS.Primary,
-    borderTopWidth: 2,
-  },
-
-  subtitle: {
-    fontSize: 24,
-    fontFamily: "RobotoMedium",
-    textAlign: "center",
   },
 
   linkView: {

@@ -7,6 +7,8 @@ import { COLORS } from "../styles/colors";
 import * as Random from "expo-random";
 import { withI18n } from "../i18n/i18n";
 import { t } from "i18n-js";
+import { mainStyle } from "../styles/mainStyle";
+import { material, systemWeights } from "react-native-typography";
 
 const ScanScreen = function (props) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -88,10 +90,10 @@ const ScanScreen = function (props) {
   };
 
   if (hasPermission === null)
-    return <Text style={s.text}>{t("REQUESTING_PERM")}</Text>;
+    return <Text style={mainStyle.text}>{t("REQUESTING_PERM")}</Text>;
 
   if (hasPermission === false)
-    return <Text style={s.text}>{t("NO_PERM")}</Text>;
+    return <Text style={mainStyle.text}>{t("NO_PERM")}</Text>;
 
   return (
     <View style={s.container}>
@@ -125,10 +127,9 @@ const s = StyleSheet.create({
   },
 
   text: {
+    ...material.headline,
     flex: 1,
     color: COLORS.LightDark,
-    fontSize: 24,
-    fontFamily: "RobotoRegular",
     textAlign: "center",
     textAlignVertical: "center",
   },
@@ -140,17 +141,16 @@ const s = StyleSheet.create({
   },
 
   modalTitle: {
+    ...material.headline,
     color: COLORS.Dark,
-    fontSize: 24,
-    fontFamily: "RobotoMedium",
     textAlign: "center",
     marginBottom: 20,
   },
 
   resultText: {
+    ...material.subheading,
+    ...systemWeights.light,
     color: COLORS.LightDark,
-    fontSize: 18,
-    fontFamily: "RobotoLight",
     textAlign: "center",
     marginBottom: 12,
   },
