@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { StyleSheet, Text, View, Animated } from "react-native";
 import { t } from "../../i18n/i18n";
 import { AntDesign } from "@expo/vector-icons";
@@ -7,15 +7,18 @@ import { COLORS } from "../../styles/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
 import { initStyle } from "../../styles/initStyle";
+import { useSetRecoilState } from "recoil";
+import { userTypeState } from "../../store/atoms/metaDataState";
+import { set } from "react-native-reanimated";
 
-export default class InitChoiceScreen extends Component {
-  state = {
-    titleFade: new Animated.Value(0),
-    clientFade: new Animated.Value(0),
-    workerFade: new Animated.Value(0),
-  };
+export default function InitChoiceScreen(props) {
+  const setUserType = useSetRecoilState(userTypeState);
 
-  componentDidMount() {
+  const titleFade = useRef(new Animated.Value(0)).current;
+  const clientFade = useRef(new Animated.Value(0)).current;
+  const workerFade = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
     Animated.sequence([
       Animated.delay(300),
       Animated.timing(this.state.titleFade, {
@@ -34,49 +37,49 @@ export default class InitChoiceScreen extends Component {
         useNativeDriver: true,
       }),
     ]).start();
-  }
+  });
 
-  client = async () => {
+  const client = async () => {
     await AsyncStorage.setItem("@covid-data-share/userType", "client");
-    this.props.navigation.navigate("Init3");
+    setUserType("client");
+    props.navigation.navigate("Init3");
   };
 
-  worker = async () => {
+  const worker = async () => {
     await AsyncStorage.setItem("@covid-data-share/userType", "worker");
-    this.props.navigation.navigate("Init4");
+    setUserType("worker");
+    props.navigation.navigate("Init4");
   };
 
-  render() {
-    return (
-      <View style={s.container}>
-        <View style={s.top}>
-          <Animated.View style={{ opacity: this.state.titleFade }}>
-            <Text style={initStyle.title}>{t("ARE_YOU")}</Text>
-            <View style={initStyle.underline}></View>
-          </Animated.View>
-          <Animated.View style={{ opacity: this.state.clientFade }}>
-            <TouchableOpacity onPress={this.client}>
-              <AntDesign
-                style={s.icon}
-                name="user"
-                size={84}
-                color={COLORS.Dark}
-              />
-              <Text style={initStyle.iconText}>{t("CLIENT")}</Text>
-            </TouchableOpacity>
-          </Animated.View>
-        </View>
-        <Animated.View style={[s.bot, { opacity: this.state.workerFade }]}>
-          <TouchableOpacity onPress={this.worker}>
-            <Entypo style={s.icon} name="shop" size={84} color={COLORS.White} />
-            <Text style={{ ...initStyle.iconText, color: COLORS.White }}>
-              {t("WORKER")}
-            </Text>
+  return (
+    <View style={s.container}>
+      <View style={s.top}>
+        <Animated.View style={{ opacity: titleFade }}>
+          <Text style={initStyle.title}>{t("ARE_YOU")}</Text>
+          <View style={initStyle.underline}></View>
+        </Animated.View>
+        <Animated.View style={{ opacity: clientFade }}>
+          <TouchableOpacity onPress={client}>
+            <AntDesign
+              style={s.icon}
+              name="user"
+              size={84}
+              color={COLORS.Dark}
+            />
+            <Text style={initStyle.iconText}>{t("CLIENT")}</Text>
           </TouchableOpacity>
         </Animated.View>
       </View>
-    );
-  }
+      <Animated.View style={[s.bot, { opacity: workerFade }]}>
+        <TouchableOpacity onPress={worker}>
+          <Entypo style={s.icon} name="shop" size={84} color={COLORS.White} />
+          <Text style={{ ...initStyle.iconText, color: COLORS.White }}>
+            {t("WORKER")}
+          </Text>
+        </TouchableOpacity>
+      </Animated.View>
+    </View>
+  );
 }
 
 const s = StyleSheet.create({
