@@ -6,6 +6,8 @@ import { Entypo } from "@expo/vector-icons";
 import { COLORS } from "../../styles/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
+import { material } from "react-native-typography";
+import { initStyle } from "../../styles/initScreens";
 
 export default class InitChoiceScreen extends Component {
   state = {
@@ -50,8 +52,8 @@ export default class InitChoiceScreen extends Component {
       <View style={s.container}>
         <View style={s.top}>
           <Animated.View style={{ opacity: this.state.titleFade }}>
-            <Text style={s.title}>{t("ARE_YOU")}</Text>
-            <View style={s.underline}></View>
+            <Text style={initStyle.title}>{t("ARE_YOU")}</Text>
+            <View style={initStyle.underline}></View>
           </Animated.View>
           <Animated.View style={{ opacity: this.state.clientFade }}>
             <TouchableOpacity onPress={this.client}>
@@ -61,14 +63,14 @@ export default class InitChoiceScreen extends Component {
                 size={84}
                 color={COLORS.Dark}
               />
-              <Text style={s.text}>{t("CLIENT")}</Text>
+              <Text style={initStyle.iconText}>{t("CLIENT")}</Text>
             </TouchableOpacity>
           </Animated.View>
         </View>
         <Animated.View style={[s.bot, { opacity: this.state.workerFade }]}>
           <TouchableOpacity onPress={this.worker}>
             <Entypo style={s.icon} name="shop" size={84} color={COLORS.White} />
-            <Text style={{ ...s.text, color: COLORS.White }}>
+            <Text style={{ ...initStyle.iconText, color: COLORS.White }}>
               {t("WORKER")}
             </Text>
           </TouchableOpacity>
@@ -91,28 +93,6 @@ const s = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     backgroundColor: COLORS.Primary,
-  },
-  xxx: {},
-
-  title: {
-    fontSize: 36,
-    fontFamily: "RobotoLight",
-    color: COLORS.Dark,
-    textAlign: "center",
-  },
-
-  underline: {
-    width: "20%",
-    alignSelf: "center",
-    borderTopColor: COLORS.Primary,
-    borderTopWidth: 2,
-  },
-
-  text: {
-    fontSize: 24,
-    fontFamily: "RobotoBold",
-    color: COLORS.Dark,
-    textAlign: "center",
   },
 
   icon: {

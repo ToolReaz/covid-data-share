@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, StyleSheet, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { material } from "react-native-typography";
 import { COLORS } from "../styles/colors";
 
 export function StyledButton({ type, text, onPress, style }) {
@@ -17,8 +18,7 @@ export function StyledButton({ type, text, onPress, style }) {
 
 const s = StyleSheet.create({
   text: {
-    fontSize: 24,
-    fontFamily: "RobotoRegular",
+    ...material.title,
     textAlign: "center",
     textAlignVertical: "center",
     color: COLORS.White,

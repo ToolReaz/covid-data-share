@@ -6,6 +6,7 @@ import InputField from "../../components/InputField";
 import { StyledButton } from "../../components/StyledButton";
 import AsyncStorage from "@react-native-community/async-storage";
 import * as Random from "expo-random";
+import { initStyle } from "../../styles/initScreens";
 
 export default class InitProfileScreen extends Component {
   state = {
@@ -62,8 +63,10 @@ export default class InitProfileScreen extends Component {
     return (
       <View style={s.container}>
         <Animated.View style={[s.top, { opacity: this.state.titleFade }]}>
-          <Text style={s.title}>{t("YOUR_PROFILE")}</Text>
-          <View style={s.underline}></View>
+          <Text style={[initStyle.title, { marginTop: 60 }]}>
+            {t("YOUR_PROFILE")}
+          </Text>
+          <View style={initStyle.underline}></View>
         </Animated.View>
         <Animated.View style={{ opacity: this.state.fieldsFade }}>
           <InputField
@@ -114,20 +117,5 @@ const s = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     padding: 24,
-  },
-
-  title: {
-    fontSize: 36,
-    fontFamily: "RobotoLight",
-    color: COLORS.Dark,
-    textAlign: "center",
-    marginTop: 60,
-  },
-
-  underline: {
-    width: "20%",
-    alignSelf: "center",
-    borderTopColor: COLORS.Primary,
-    borderTopWidth: 2,
   },
 });

@@ -7,6 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../styles/colors";
 import { useSetRecoilState } from "recoil";
 import { metaDataState } from "../../store/atoms/metaDataState";
+import { initStyle } from "../../styles/initScreens";
 
 export default function InitEndScreen() {
   const setIsInit = useSetRecoilState(metaDataState);
@@ -43,10 +44,10 @@ export default function InitEndScreen() {
   return (
     <View style={s.container}>
       <Animated.View style={{ opacity: titleFade }}>
-        <Text style={s.title}>{t("CONGRAT")}</Text>
-        <View style={s.underline}></View>
+        <Text style={initStyle.title}>{t("CONGRAT")}</Text>
+        <View style={initStyle.underline}></View>
       </Animated.View>
-      <Animated.Text style={[s.text, { opacity: textFade }]}>
+      <Animated.Text style={[initStyle.text, { opacity: textFade }]}>
         {t("INIT_FINISH")}
       </Animated.Text>
       <Animated.View style={{ opacity: buttonFade }}>
@@ -55,7 +56,7 @@ export default function InitEndScreen() {
           text={
             <>
               {t("LETS_GO")}{" "}
-              <AntDesign name="arrowright" size={24} color={COLORS.White} />
+              <AntDesign name="arrowright" size={18} color={COLORS.White} />
             </>
           }
           type="primary"

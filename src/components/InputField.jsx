@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { COLORS } from "../styles/colors";
 import PropTypes from "prop-types";
+import { material, systemWeights } from "react-native-typography";
 
 export default function InputField({ title, ...props }) {
   return (
@@ -22,18 +23,18 @@ const s = StyleSheet.create({
     marginBottom: 24,
   },
   title: {
-    fontSize: 18,
-    fontFamily: "RobotoLight",
+    ...material.subheading,
+    ...systemWeights.light,
     color: COLORS.Primary,
     marginBottom: 2,
   },
   input: {
+    ...material.subheading,
+    ...systemWeights.light,
     height: 42,
     backgroundColor: COLORS.Light,
     borderBottomColor: COLORS.Primary,
     borderBottomWidth: 1,
-    fontSize: 16,
-    fontFamily: "RobotoLight",
     paddingLeft: 8,
   },
 });

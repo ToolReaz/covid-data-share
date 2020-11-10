@@ -4,6 +4,8 @@ import { StyledButton } from "../../components/StyledButton";
 import { t } from "../../i18n/i18n";
 import { COLORS } from "../../styles/colors";
 import { AntDesign } from "@expo/vector-icons";
+import { material, systemWeights } from "react-native-typography";
+import { initStyle } from "../../styles/initScreens";
 
 export default class InitWelcomeScreen extends Component {
   state = {
@@ -39,14 +41,14 @@ export default class InitWelcomeScreen extends Component {
         <Animated.View
           style={[s.topContainer, { opacity: this.state.titleFade }]}
         >
-          <Text style={s.title}>{t("WELCOME")}</Text>
+          <Text style={initStyle.title}>{t("WELCOME")}</Text>
           <Text style={s.on}>{t("ON")}</Text>
-          <Text style={s.title}>CODASH</Text>
-          <View style={s.underline}></View>
+          <Text style={initStyle.title}>CODASH</Text>
+          <View style={initStyle.underline}></View>
         </Animated.View>
         <View style={s.botContainer}>
           <Animated.View style={{ opacity: this.state.textFade }}>
-            <Text style={s.text}>{t("INIT_START")}</Text>
+            <Text style={initStyle.text}>{t("INIT_START")}</Text>
           </Animated.View>
           <Animated.View style={[s.btn, { opacity: this.state.buttonFade }]}>
             <StyledButton
@@ -54,7 +56,7 @@ export default class InitWelcomeScreen extends Component {
               text={
                 <>
                   {t("BEGIN")}{" "}
-                  <AntDesign name="arrowright" size={24} color={COLORS.White} />
+                  <AntDesign name="arrowright" size={18} color={COLORS.White} />
                 </>
               }
               type="primary"
@@ -77,35 +79,13 @@ const s = StyleSheet.create({
     justifyContent: "center",
   },
 
-  title: {
-    fontSize: 36,
-    fontFamily: "RobotoLight",
-    color: COLORS.Dark,
-    textAlign: "center",
-  },
-
   on: {
-    fontSize: 18,
-    fontFamily: "RobotoLight",
+    ...material.body1,
+    ...systemWeights.light,
     color: COLORS.Dark,
     textAlign: "center",
     marginTop: 20,
     marginBottom: 20,
-  },
-
-  text: {
-    fontSize: 18,
-    fontFamily: "RobotoLight",
-    color: COLORS.Dark,
-    textAlign: "center",
-    marginTop: 40,
-  },
-
-  underline: {
-    width: "20%",
-    alignSelf: "center",
-    borderTopColor: COLORS.Primary,
-    borderTopWidth: 2,
   },
 
   botContainer: {
