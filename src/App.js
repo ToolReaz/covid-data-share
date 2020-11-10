@@ -111,6 +111,8 @@ export default function App() {
       }
     : { header: () => null };
 
+    console.log(isInit)
+
   return (
     <NavigationContainer theme={{ colors: { background: COLORS.White } }}>
       <Stack.Navigator
