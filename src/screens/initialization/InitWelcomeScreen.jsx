@@ -5,7 +5,7 @@ import { t } from "../../i18n/i18n";
 import { COLORS } from "../../styles/colors";
 import { AntDesign } from "@expo/vector-icons";
 import { material, systemWeights } from "react-native-typography";
-import { initStyle } from "../../styles/initScreens";
+import { initStyle } from "../../styles/initStyle";
 
 export default class InitWelcomeScreen extends Component {
   state = {

@@ -7,7 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../styles/colors";
 import { useSetRecoilState } from "recoil";
 import { metaDataState } from "../../store/atoms/metaDataState";
-import { initStyle } from "../../styles/initScreens";
+import { initStyle } from "../../styles/initStyle";
 
 export default function InitEndScreen() {
   const setIsInit = useSetRecoilState(metaDataState);

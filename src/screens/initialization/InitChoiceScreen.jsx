@@ -6,8 +6,7 @@ import { Entypo } from "@expo/vector-icons";
 import { COLORS } from "../../styles/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
-import { material } from "react-native-typography";
-import { initStyle } from "../../styles/initScreens";
+import { initStyle } from "../../styles/initStyle";
 
 export default class InitChoiceScreen extends Component {
   state = {

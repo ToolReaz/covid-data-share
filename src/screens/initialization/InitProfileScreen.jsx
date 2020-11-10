@@ -6,7 +6,7 @@ import InputField from "../../components/InputField";
 import { StyledButton } from "../../components/StyledButton";
 import AsyncStorage from "@react-native-community/async-storage";
 import * as Random from "expo-random";
-import { initStyle } from "../../styles/initScreens";
+import { initStyle } from "../../styles/initStyle";
 
 export default class InitProfileScreen extends Component {
   state = {
