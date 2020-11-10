@@ -1,27 +1,27 @@
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator, createSw } from "@react-navigation/stack";
-import HomeScreen from "./src/screens/HomeScreen";
-import StoreScreen from "./src/screens/StoreScreen";
-import ShareScreen from "./src/screens/ShareScreen";
-import ScanScreen from "./src/screens/ScanScreen";
-import CreateProfileScreen from "./src/screens/CreateProfileScreen";
-import SplashScreen from "./src/screens/SplashScreen";
-import { COLORS } from "./src/styles/colors";
+import HomeScreen from "./screens/HomeScreen";
+import StoreScreen from "./screens/StoreScreen";
+import ShareScreen from "./screens/ShareScreen";
+import ScanScreen from "./screens/ScanScreen";
+import CreateProfileScreen from "./screens/CreateProfileScreen";
+import SplashScreen from "./screens/SplashScreen";
+import { COLORS } from "./styles/colors";
 import { t } from "i18n-js";
-import InitWelcomeScreen from "./src/screens/initialization/InitWelcomeScreen";
-import InitChoiceScreen from "./src/screens/initialization/InitChoiceScreen";
-import InitProfileScreen from "./src/screens/initialization/InitProfileScreen";
-import InitEndScreen from "./src/screens/initialization/InitEndScreen";
+import InitWelcomeScreen from "./screens/initialization/InitWelcomeScreen";
+import InitChoiceScreen from "./screens/initialization/InitChoiceScreen";
+import InitProfileScreen from "./screens/initialization/InitProfileScreen";
+import InitEndScreen from "./screens/initialization/InitEndScreen";
 import * as SQLite from "expo-sqlite";
-import { Provider, useStore } from "react-redux";
-import { store } from "./src/redux/store";
+import { useRecoilState } from "recoil";
+import { metaDataState } from "./store/atoms/metaDataState";
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [isInit, setIsInit] = useState(false);
+  const [isInit, setIsInit] = useRecoilState(metaDataState);
 
   const initContext = React.useMemo(() => ({
     setInited: async () => {
@@ -39,18 +39,18 @@ export default function App() {
   }));
 
   const [fontLoaded] = Font.useFonts({
-    RobotoBlack: require("./assets/fonts/Roboto-Black.ttf"),
-    RobotoBlackItalic: require("./assets/fonts/Roboto-BlackItalic.ttf"),
-    RobotoBold: require("./assets/fonts/Roboto-Bold.ttf"),
-    RobotoBoldItalic: require("./assets/fonts/Roboto-BoldItalic.ttf"),
-    RobotoItalic: require("./assets/fonts/Roboto-Italic.ttf"),
-    RobotoLight: require("./assets/fonts/Roboto-Light.ttf"),
-    RobotoLightItalic: require("./assets/fonts/Roboto-LightItalic.ttf"),
-    RobotoMedium: require("./assets/fonts/Roboto-Medium.ttf"),
-    RobotoMediumItalic: require("./assets/fonts/Roboto-MediumItalic.ttf"),
-    RobotoRegular: require("./assets/fonts/Roboto-Regular.ttf"),
-    RobotoThin: require("./assets/fonts/Roboto-Thin.ttf"),
-    RobotoThinItalic: require("./assets/fonts/Roboto-ThinItalic.ttf"),
+    RobotoBlack: require("../assets/fonts/Roboto-Black.ttf"),
+    RobotoBlackItalic: require("../assets/fonts/Roboto-BlackItalic.ttf"),
+    RobotoBold: require("../assets/fonts/Roboto-Bold.ttf"),
+    RobotoBoldItalic: require("../assets/fonts/Roboto-BoldItalic.ttf"),
+    RobotoItalic: require("../assets/fonts/Roboto-Italic.ttf"),
+    RobotoLight: require("../assets/fonts/Roboto-Light.ttf"),
+    RobotoLightItalic: require("../assets/fonts/Roboto-LightItalic.ttf"),
+    RobotoMedium: require("../assets/fonts/Roboto-Medium.ttf"),
+    RobotoMediumItalic: require("../assets/fonts/Roboto-MediumItalic.ttf"),
+    RobotoRegular: require("../assets/fonts/Roboto-Regular.ttf"),
+    RobotoThin: require("../assets/fonts/Roboto-Thin.ttf"),
+    RobotoThinItalic: require("../assets/fonts/Roboto-ThinItalic.ttf"),
   });
 
   if (!fontLoaded) {
@@ -112,16 +112,14 @@ export default function App() {
     : { header: () => null };
 
   return (
-    <Provider store={store}>
-      <NavigationContainer theme={{ colors: { background: COLORS.White } }}>
-        <Stack.Navigator
-          initialRouteName="Home"
-          mode="card"
-          screenOptions={screenOptions}
-        >
-          {isInit ? AppStack : InitStack}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+    <NavigationContainer theme={{ colors: { background: COLORS.White } }}>
+      <Stack.Navigator
+        initialRouteName="Home"
+        mode="card"
+        screenOptions={screenOptions}
+      >
+        {isInit ? AppStack : InitStack}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
