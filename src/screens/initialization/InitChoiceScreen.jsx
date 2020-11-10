@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { StyleSheet, Text, View, Animated } from "react-native";
 import { t } from "../../i18n/i18n";
 import { AntDesign } from "@expo/vector-icons";
@@ -9,7 +9,6 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { initStyle } from "../../styles/initStyle";
 import { useSetRecoilState } from "recoil";
 import { userTypeState } from "../../store/atoms/metaDataState";
-import { set } from "react-native-reanimated";
 
 export default function InitChoiceScreen(props) {
   const setUserType = useSetRecoilState(userTypeState);
@@ -21,17 +20,17 @@ export default function InitChoiceScreen(props) {
   useEffect(() => {
     Animated.sequence([
       Animated.delay(300),
-      Animated.timing(this.state.titleFade, {
+      Animated.timing(titleFade, {
         toValue: 1,
         duration: 2000,
         useNativeDriver: true,
       }),
-      Animated.timing(this.state.clientFade, {
+      Animated.timing(clientFade, {
         toValue: 1,
         duration: 1000,
         useNativeDriver: true,
       }),
-      Animated.timing(this.state.workerFade, {
+      Animated.timing(workerFade, {
         toValue: 1,
         duration: 1000,
         useNativeDriver: true,

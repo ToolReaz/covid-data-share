@@ -19,7 +19,6 @@ export default function HomeScreen() {
       <View style={s.container}>
         <View style={s.topLinksView}>
           <View>
-            <Text style={mainStyle.title}>{userType}</Text>
             <Text style={mainStyle.title}>CODASH</Text>
             <View style={mainStyle.underline}></View>
           </View>
