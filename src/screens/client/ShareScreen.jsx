@@ -8,7 +8,6 @@ import { COLORS } from "../../styles/colors";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
 import QRCode from "react-native-qrcode-svg";
-import { AntDesign } from "@expo/vector-icons";
 import StyledModal from "../../components/StyledModal";
 import { t } from "../../i18n/i18n";
 import { mainStyle } from "../../styles/mainStyle";

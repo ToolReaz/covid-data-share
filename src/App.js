@@ -134,8 +134,6 @@ export default function App() {
     ? {
         headerStyle: {
           backgroundColor: COLORS.Primary,
-          borderBottomColor: COLORS.Contrast,
-          borderBottomWidth: 2,
         },
         headerTintColor: COLORS.White,
         headerTitleStyle: { ...material.headline, color: COLORS.White },

@@ -5,7 +5,7 @@ import { material } from "react-native-typography";
 import { COLORS } from "../styles/colors";
 
 export function StyledButton({ type, text, onPress, style }) {
-  const color = type == "primary" ? COLORS.Primary : COLORS.Dark;
+  const color = type == "primary" ? COLORS.Secondary : COLORS.Dark;
   return (
     <TouchableOpacity
       style={{ backgroundColor: color, ...style }}

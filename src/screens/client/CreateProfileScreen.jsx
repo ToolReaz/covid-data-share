@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import React, { Component, createRef } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
-import InputField from "../components/InputField";
-import { StyledButton } from "../components/StyledButton";
+import InputField from "../../components/InputField";
+import { StyledButton } from "../../components/StyledButton";
 import * as Random from "expo-random";
 import { t } from "i18n-js";
 

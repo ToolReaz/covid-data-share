@@ -25,15 +25,15 @@ const s = StyleSheet.create({
   title: {
     ...material.subheading,
     ...systemWeights.light,
-    color: COLORS.Primary,
+    color: COLORS.Dark,
     marginBottom: 2,
   },
   input: {
     ...material.subheading,
     ...systemWeights.light,
     height: 42,
-    backgroundColor: COLORS.Light,
-    borderBottomColor: COLORS.Primary,
+    backgroundColor: COLORS.Light + "DD",
+    borderBottomColor: COLORS.Dark,
     borderBottomWidth: 1,
     paddingLeft: 8,
   },
