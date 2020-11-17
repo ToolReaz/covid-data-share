@@ -1,6 +1,8 @@
+import { t } from "i18n-js";
 import React, { Component } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { COLORS } from "../styles/colors";
+import { initStyle } from "../styles/initStyle";
 import { mainStyle } from "../styles/mainStyle";
 
 export default class SplashScreen extends Component {
@@ -13,6 +15,9 @@ export default class SplashScreen extends Component {
         </View>
         <View style={s.loader}>
           <ActivityIndicator size="large" color={COLORS.Primary} />
+        </View>
+        <View style={s.text}>
+          <Text style={initStyle.text}>{t("LOADING")}...</Text>
         </View>
       </View>
     );
@@ -32,5 +37,11 @@ const s = StyleSheet.create({
 
   loader: {
     flex: 1,
+    justifyContent: "center",
+  },
+
+  text: {
+    flex: 1,
+    justifyContent: "center",
   },
 });

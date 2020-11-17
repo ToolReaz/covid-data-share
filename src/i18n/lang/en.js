@@ -25,6 +25,7 @@ export const en = {
   ADD: "Add",
   SHARE: "Share",
   CREATE: "Create",
+  LOADING: "Loading",
 
   // Screen names
   S_SHARE: "Share",

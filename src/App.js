@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator, createSw } from "@react-navigation/stack";
 import HomeScreen from "./screens/HomeScreen";
@@ -16,11 +16,15 @@ import * as SQLite from "expo-sqlite";
 import { useRecoilState } from "recoil";
 import { metaDataState } from "./store/atoms/metaDataState";
 import { material } from "react-native-typography";
+import SplashScreen from "./screens/SplashScreen";
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [loaded, setLoaded] = useState(false);
   const [isInit, setIsInit] = useRecoilState(metaDataState);
+
+  useEffect(() => {});
 
   const initContext = React.useMemo(() => ({
     setInited: async () => {
@@ -37,8 +41,10 @@ export default function App() {
     },
   }));
 
+  if (!loaded) return <SplashScreen />;
+
   const AppStack = (
-    <>
+    <SplashScreen>
       <Stack.Screen
         options={{ headerShown: false }}
         name="Home"
@@ -64,7 +70,7 @@ export default function App() {
         name="CreateProfile"
         component={CreateProfileScreen}
       />
-    </>
+    </SplashScreen>
   );
 
   const InitStack = (
@@ -87,8 +93,6 @@ export default function App() {
         headerTitleStyle: { ...material.headline, color: COLORS.White },
       }
     : { header: () => null };
-
-  console.log(isInit);
 
   return (
     <NavigationContainer theme={{ colors: { background: COLORS.White } }}>

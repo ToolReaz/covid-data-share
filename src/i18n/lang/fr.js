@@ -26,6 +26,7 @@ export const fr = {
   ADD: "Ajouter",
   SHARE: "Partager",
   CREATE: "Créer",
+  LOADING: "Chargement",
 
   // Screen names
   S_SHARE: "Partager",
