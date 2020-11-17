@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ProfileCard from "../components/ProfileCard";
-import { StyledButton } from "../components/StyledButton";
-import { COLORS } from "../styles/colors";
+import ProfileCard from "../../components/ProfileCard";
+import { StyledButton } from "../../components/StyledButton";
+import { COLORS } from "../../styles/colors";
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
 import * as Print from "expo-print";
 import * as Sharing from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
 import { t } from "i18n-js";
-import { mainStyle } from "../styles/mainStyle";
+import { mainStyle } from "../../styles/mainStyle";
 
 export default class StoreScreen extends Component {
   state = {

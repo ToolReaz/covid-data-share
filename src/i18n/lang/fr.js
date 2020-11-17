@@ -18,6 +18,8 @@ export const fr = {
   SHARE_BTN: "Partager",
   STORE_BTN: "Stockage",
   COLLECT_BTN: "Collecter",
+  SETTINGS_BTN: "Paramètres",
+  PROFILES_BTN: "Profils",
 
   // General
   ERROR: "Erreur",

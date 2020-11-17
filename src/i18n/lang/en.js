@@ -17,6 +17,8 @@ export const en = {
   SHARE_BTN: "Share",
   STORE_BTN: "Store",
   COLLECT_BTN: "Colect",
+  SETTINGS_BTN: "Settings",
+  PROFILES_BTN: "Profiles",
 
   // General
   ERROR: "Error",

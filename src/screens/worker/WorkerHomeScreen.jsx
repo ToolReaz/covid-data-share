@@ -1,18 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import { Text, View, StyleSheet } from "react-native";
-import BackgroundSvg from "../components/BackgroundSvg";
-import { EvilIcons } from "@expo/vector-icons";
+import BackgroundSvg from "../../components/BackgroundSvg";
 import { Feather } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { COLORS } from "./../styles/colors";
+import { COLORS } from "../../styles/colors";
 import { t } from "i18n-js";
-import { mainStyle } from "../styles/mainStyle";
-import { useRecoilValue } from "recoil";
-import { userTypeState } from "../store/atoms/metaDataState";
+import { mainStyle } from "../../styles/mainStyle";
+import { AntDesign } from "@expo/vector-icons";
 
-export default function HomeScreen() {
-  const userType = useRecoilValue(userTypeState);
-
+export default function WorkerHomeScreen({ navigation }) {
   return (
     <View>
       <BackgroundSvg />
@@ -24,16 +19,16 @@ export default function HomeScreen() {
           </View>
           <View
             style={s.linkView}
-            onTouchStart={() => this.props.navigation.navigate("Share")}
+            onTouchStart={() => navigation.navigate("Scan")}
           >
-            <EvilIcons name="share-apple" size={200} color={COLORS.Dark} />
-            <Text style={[mainStyle.iconTitle]}>{t("SHARE_BTN")}</Text>
+            <AntDesign name="scan1" size={128} color={COLORS.Dark} />
+            <Text style={[mainStyle.iconTitle]}>{t("COLLECT_BTN")}</Text>
           </View>
         </View>
         <View style={s.bottomLinksView}>
           <View
             style={s.linkView}
-            onTouchStart={() => this.props.navigation.navigate("Store")}
+            onTouchStart={() => navigation.navigate("Store")}
           >
             <Feather name="database" size={128} color={COLORS.White} />
             <Text style={[mainStyle.iconTitle, { color: COLORS.White }]}>
@@ -42,15 +37,11 @@ export default function HomeScreen() {
           </View>
           <View
             style={s.linkView}
-            onTouchStart={() => this.props.navigation.navigate("Scan")}
+            onTouchStart={() => navigation.navigate("Settings")}
           >
-            <MaterialCommunityIcons
-              name="file-document-box-search-outline"
-              size={128}
-              color={COLORS.White}
-            />
+            <AntDesign name="setting" size={128} color={COLORS.White} />
             <Text style={[mainStyle.iconTitle, { color: COLORS.White }]}>
-              {t("COLLECT_BTN")}
+              {t("SETTINGS_BTN")}
             </Text>
           </View>
         </View>

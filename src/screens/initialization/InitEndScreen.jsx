@@ -37,7 +37,8 @@ export default function InitEndScreen() {
     ]).start();
   });
 
-  const end = () => {
+  const end =async () => {
+    await AsyncStorage.setItem("@covid-data-share/isInit", "true")
     setIsInit(true);
   };
 

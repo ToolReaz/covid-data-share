@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet, Alert, Modal } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ProfileCard from "../components/ProfileCard";
-import { StyledButton } from "../components/StyledButton";
-import { COLORS } from "../styles/colors";
+import ProfileCard from "../../components/ProfileCard";
+import { StyledButton } from "../../components/StyledButton";
+import { COLORS } from "../../styles/colors";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
 import QRCode from "react-native-qrcode-svg";
 import { AntDesign } from "@expo/vector-icons";
-import StyledModal from "../components/StyledModal";
-import { t } from "../i18n/i18n";
-import { mainStyle } from "../styles/mainStyle";
+import StyledModal from "../../components/StyledModal";
+import { t } from "../../i18n/i18n";
+import { mainStyle } from "../../styles/mainStyle";
 
 export default class ShareScreen extends Component {
   state = {

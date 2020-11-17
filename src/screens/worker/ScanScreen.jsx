@@ -2,12 +2,12 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import React, { useState, useEffect } from "react";
 import { Alert, Text, View, StyleSheet } from "react-native";
-import StyledModal from "../components/StyledModal";
-import { COLORS } from "../styles/colors";
+import StyledModal from "../../components/StyledModal";
+import { COLORS } from "../../styles/colors";
 import * as Random from "expo-random";
-import { withI18n } from "../i18n/i18n";
+import { withI18n } from "../../i18n/i18n";
 import { t } from "i18n-js";
-import { mainStyle } from "../styles/mainStyle";
+import { mainStyle } from "../../styles/mainStyle";
 import { material, systemWeights } from "react-native-typography";
 
 const ScanScreen = function (props) {
