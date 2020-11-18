@@ -11,6 +11,7 @@ import QRCode from "react-native-qrcode-svg";
 import StyledModal from "../../components/StyledModal";
 import { t } from "../../i18n/i18n";
 import { mainStyle } from "../../styles/mainStyle";
+import * as SQLite from "expo-sqlite";
 
 export default class ShareScreen extends Component {
   state = {
@@ -18,26 +19,39 @@ export default class ShareScreen extends Component {
     showModal: false,
   };
 
-  async componentDidMount() {
-    await this.getData();
+  componentDidMount() {
+    SQLite.openDatabase("CODASH").transaction((tx) => {
+      tx.executeSql(
+        `SELECT * INTO Profiles`,
+        [],
+        (resultset) => {
+          console.log(resultset);
+          this.setState({ profiles: [] });
+        },
+        console.log
+      );
+    });
   }
 
-  getData = async () => {
-    const raw = await AsyncStorage.getItem("@covid-data-share/profiles");
-    if (raw) {
-      const profiles = JSON.parse(raw);
-      this.setState({ profiles });
-    }
+  getData = async (d) => {
+    console.log("hey");
+    console.log(d);
   };
 
   delete = async (id) => {
-    const { profiles } = this.state;
-    const filtered = profiles.filter((x) => x.id != id);
-    this.setState({ profiles: filtered });
-    await AsyncStorage.setItem(
-      "@covid-data-share/profiles",
-      JSON.stringify(filtered)
-    );
+    SQLite.openDatabase("CODASH").transaction((tx) => {
+      tx.executeSql(
+        `DELETE * INTO Profiles WHERE rowid = ?`,
+        [id],
+        (resultset) => {
+          console.log(resultset);
+          const { profiles } = this.state;
+          const filtered = profiles.filter((x) => x.id != id);
+          this.setState({ profiles: filtered });
+        },
+        console.log
+      );
+    });
   };
 
   share = () => {

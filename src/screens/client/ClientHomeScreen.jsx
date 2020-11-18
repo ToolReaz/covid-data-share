@@ -5,13 +5,9 @@ import { EvilIcons } from "@expo/vector-icons";
 import { COLORS } from "../../styles/colors";
 import { t } from "i18n-js";
 import { mainStyle } from "../../styles/mainStyle";
-import { useRecoilValue } from "recoil";
-import { userTypeState } from "../../store/atoms/metaDataState";
 import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
 
 export default function ClientHomeScreen({ navigation }) {
-  const userType = useRecoilValue(userTypeState);
 
   return (
     <View>
@@ -31,15 +27,6 @@ export default function ClientHomeScreen({ navigation }) {
           </View>
         </View>
         <View style={s.bottomLinksView}>
-          <View
-            style={s.linkView}
-            onTouchStart={() => navigation.navigate("Store")}
-          >
-            <FontAwesome name="users" size={128} color={COLORS.White} />
-            <Text style={[mainStyle.iconTitle, { color: COLORS.White }]}>
-              {t("PROFILES_BTN")}
-            </Text>
-          </View>
           <View
             style={s.linkView}
             onTouchStart={() => navigation.navigate("Settings")}
@@ -74,7 +61,7 @@ const s = StyleSheet.create({
     flex: 2,
     flexDirection: "row",
     width: "100%",
-    justifyContent: "space-around",
+    justifyContent: "center",
     backgroundColor: COLORS.Primary,
   },
 

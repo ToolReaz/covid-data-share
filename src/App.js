@@ -19,6 +19,7 @@ import SplashScreen from "./screens/SplashScreen";
 import AsyncStorage from "@react-native-community/async-storage";
 import ClientHomeScreen from "./screens/client/ClientHomeScreen";
 import WorkerHomeScreen from "./screens/worker/WorkerHomeScreen";
+import { iniStorage } from "./libs/initStorage";
 
 const Stack = createStackNavigator();
 
@@ -29,34 +30,20 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      const isInit = await AsyncStorage.getItem("@covid-data-share/isInit");
-      const userType = await AsyncStorage.getItem("@covid-data-share/userType");
+      const isAppInit = await AsyncStorage.getItem("@covid-data-share/isInit");
+      const appUserType = await AsyncStorage.getItem("@covid-data-share/userType");
 
-      if (isInit === "true") {
+      if (isAppInit === "true") {
         setIsInit(true);
-        //setUserType(userType);
+        //setUserType(appUserType);
         setUserType("client");
       } else {
+        await iniStorage();
         setIsInit(false);
       }
       setLoaded(true);
     })();
   });
-
-  const initContext = React.useMemo(() => ({
-    setInited: async () => {
-      console.log("caca");
-      SQLite.openDatabase("CODASH").transaction((tx) => {
-        tx.executeSql(
-          "INSERT OR REPLACE INTO Meta(key, value) VALUES ('isInit', true)",
-          [],
-          () => {
-            setIsInit(true);
-          }
-        );
-      });
-    },
-  }));
 
   if (!loaded) return <SplashScreen />;
 

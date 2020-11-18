@@ -1,10 +1,9 @@
-import AsyncStorage from "@react-native-community/async-storage";
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import InputField from "../../components/InputField";
 import { StyledButton } from "../../components/StyledButton";
-import * as Random from "expo-random";
 import { t } from "i18n-js";
+import * as SQLite from "expo-sqlite";
 
 export default class CreateProfileScreen extends Component {
   state = {
@@ -18,16 +17,17 @@ export default class CreateProfileScreen extends Component {
     const { lastname, firstname, phone, address } = this.state;
 
     if (lastname != "" && firstname != "" && phone != "" && address != "") {
-      const raw = await AsyncStorage.getItem("@covid-data-share/profiles");
-      const profiles = raw ? JSON.parse(raw) : [];
-      const id = (await Random.getRandomBytesAsync(8)).join("").toString("HEX");
-      const updatedProfiles = [
-        ...profiles,
-        { id, lastname, firstname, phone, address },
-      ];
-      const json = JSON.stringify(updatedProfiles);
-      await AsyncStorage.setItem("@covid-data-share/profiles", json);
-      this.props.navigation.goBack();
+      SQLite.openDatabase("CODASH").transaction((tx) => {
+        tx.executeSql(
+          `INSERT INTO Profiles(lastname, firstname, phone, address) VALUES (?,?,?,?)`,
+          [lastname, firstname, phone, address],
+          (resultset) => {
+            console.log(resultset);
+            this.props.navigation.goBack(resultset);
+          },
+          console.log
+        );
+      });
     } else {
       Alert.alert(t("ERROR"), t("ALL_FIELDS_REQUIRED"));
     }
