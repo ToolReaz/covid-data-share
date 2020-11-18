@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator, createSw } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  createSw,
+  Header,
+} from "@react-navigation/stack";
 import StoreScreen from "./screens/worker/StoreScreen";
 import ShareScreen from "./screens/client/ShareScreen";
 import ScanScreen from "./screens/worker/ScanScreen";
@@ -21,6 +25,8 @@ import ClientHomeScreen from "./screens/client/ClientHomeScreen";
 import WorkerHomeScreen from "./screens/worker/WorkerHomeScreen";
 import { iniStorage } from "./libs/initStorage";
 import SettingScreen from "./screens/SettingScreen";
+import { LinearGradient } from "expo-linear-gradient";
+import { View } from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -132,9 +138,13 @@ export default function App() {
 
   const screenOptions = isInit
     ? {
-        headerStyle: {
-          backgroundColor: COLORS.Primary,
-        },
+        header: (props) => (
+          <View>
+            <LinearGradient colors={[COLORS.GradientStart, COLORS.GradientEnd]}>
+              <Header {...props} />
+            </LinearGradient>
+          </View>
+        ),
         headerTintColor: COLORS.White,
         headerTitleStyle: { ...material.headline, color: COLORS.White },
       }
