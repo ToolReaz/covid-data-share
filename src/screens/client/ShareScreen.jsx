@@ -15,14 +15,11 @@ import * as SQLite from "expo-sqlite";
 export default class ShareScreen extends Component {
   state = {
     profiles: [],
+    selectedProfiles: [],
     showModal: false,
   };
 
   componentDidMount() {
-    this.getData();
-  }
-
-  getData = (d) => {
     SQLite.openDatabase("CODASH").transaction((tx) => {
       tx.executeSql(
         `SELECT rowid, * FROM Profiles`,
@@ -30,6 +27,17 @@ export default class ShareScreen extends Component {
         (t, resultset) => {
           this.setState({ profiles: resultset.rows._array });
         },
+        console.log
+      );
+    });
+  }
+
+  select = async (profile, isSelected) => {
+    SQLite.openDatabase("CODASH").transaction((tx) => {
+      tx.executeSql(
+        `UPDATE Profiles SET share=? WHERE rowid=?`,
+        [isSelected ? 1 : 0, profile.rowid],
+        (t, resultset) => {},
         console.log
       );
     });
@@ -51,7 +59,20 @@ export default class ShareScreen extends Component {
   };
 
   share = () => {
-    this.setState({ showModal: true });
+    SQLite.openDatabase("CODASH").transaction((tx) => {
+      tx.executeSql(
+        `SELECT lastname, firstname, phone, address FROM Profiles WHERE share=1`,
+        [],
+        (t, resultSet) => {
+          console.log(resultSet.rows._array);
+          this.setState({
+            selectedProfiles: resultSet.rows._array,
+            showModal: true,
+          });
+        },
+        console.log
+      );
+    });
   };
 
   close = () => {
@@ -77,7 +98,7 @@ export default class ShareScreen extends Component {
           >
             <QRCode
               style={s.qrcode}
-              value={JSON.stringify(this.state.profiles)}
+              value={JSON.stringify(this.state.selectedProfiles)}
               size={200}
             />
             <Text style={mainStyle.text}>Show this QR code to the scanner</Text>
@@ -93,7 +114,8 @@ export default class ShareScreen extends Component {
               data={this.state.profiles}
               renderItem={({ item }) => (
                 <ProfileCard
-                  onDelete={() => this.delete(item.rowid)}
+                  onDelete={this.delete}
+                  onSelect={this.select}
                   data={item}
                 />
               )}

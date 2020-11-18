@@ -8,7 +8,8 @@ export function iniStorage() {
             lastname TEXT NOT NULL,
             firstname TEXT NOT NULL,
             phone TEXT NOT NULL,
-            address TEXT NOT NULL
+            address TEXT NOT NULL,
+            share INTEGER DEFAULT 0
             )`,
         [],
         () => {
