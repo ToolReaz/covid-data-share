@@ -7,6 +7,7 @@ import { StyledButton } from "../../components/StyledButton";
 import AsyncStorage from "@react-native-community/async-storage";
 import * as Random from "expo-random";
 import { initStyle } from "../../styles/initStyle";
+import * as SQLite from "expo-sqlite";
 
 export default class InitProfileScreen extends Component {
   state = {
@@ -44,16 +45,17 @@ export default class InitProfileScreen extends Component {
     const { lastname, firstname, phone, address } = this.state;
 
     if (lastname != "" && firstname != "" && phone != "" && address != "") {
-      const raw = await AsyncStorage.getItem("@covid-data-share/profiles");
-      const profiles = raw ? JSON.parse(raw) : [];
-      const id = (await Random.getRandomBytesAsync(8)).join("").toString("HEX");
-      const updatedProfiles = [
-        ...profiles,
-        { id, lastname, firstname, phone, address },
-      ];
-      const json = JSON.stringify(updatedProfiles);
-      await AsyncStorage.setItem("@covid-data-share/profiles", json);
-      this.props.navigation.navigate("Init4");
+      SQLite.openDatabase("CODASH").transaction((tx) => {
+        tx.executeSql(
+          `INSERT INTO Profiles(lastname, firstname, phone, address) VALUES (?,?,?,?)`,
+          [lastname, firstname, phone, address],
+          (resultset) => {
+            console.log(resultset);
+            this.props.navigation.navigate("Init4");
+          },
+          console.log
+        );
+      });
     } else {
       Alert.alert(t("ERROR"), t("ALL_FIELDS_REQUIRED"));
     }

@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
-export const metaDataState = atom({
-  key: "meta-data-state",
+export const isInitState = atom({
+  key: "is-init-state",
   default: false,
 });
 

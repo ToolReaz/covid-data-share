@@ -35,6 +35,7 @@ export const fr = {
   S_SCAN: "Collecter",
   S_STORE: "Stockage",
   S_CREATE_PROFILE: "Créer nouveau profil",
+  S_SETTINGS: "Paramètres",
 
   // Scan Screen
   WRONG_QRCODE: "Ce code QR n'est pas conçu pour cette application !",

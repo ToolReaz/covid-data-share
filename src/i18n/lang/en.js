@@ -34,6 +34,7 @@ export const en = {
   S_SCAN: "Scan",
   S_STORE: "Store",
   S_CREATE_PROFILE: "Create new profile",
+  S_SETTINGS: "Settings",
 
   // Scan Screen
   WRONG_QRCODE: "This QR code is not meant to be scanned by this app !",

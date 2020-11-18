@@ -6,11 +6,11 @@ import { t } from "../../i18n/i18n";
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../styles/colors";
 import { useSetRecoilState } from "recoil";
-import { metaDataState } from "../../store/atoms/metaDataState";
+import { isInitState } from "../../store/atoms/metaDataState";
 import { initStyle } from "../../styles/initStyle";
 
 export default function InitEndScreen() {
-  const setIsInit = useSetRecoilState(metaDataState);
+  const setIsInit = useSetRecoilState(isInitState);
 
   const titleFade = useRef(new Animated.Value(0)).current;
   const textFade = useRef(new Animated.Value(0)).current;
@@ -37,8 +37,8 @@ export default function InitEndScreen() {
     ]).start();
   });
 
-  const end =async () => {
-    await AsyncStorage.setItem("@covid-data-share/isInit", "true")
+  const end = async () => {
+    await AsyncStorage.setItem("@covid-data-share/isInit", "true");
     setIsInit(true);
   };
 

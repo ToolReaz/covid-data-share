@@ -6,7 +6,6 @@ import ProfileCard from "../../components/ProfileCard";
 import { StyledButton } from "../../components/StyledButton";
 import { COLORS } from "../../styles/colors";
 import { Feather } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-community/async-storage";
 import QRCode from "react-native-qrcode-svg";
 import StyledModal from "../../components/StyledModal";
 import { t } from "../../i18n/i18n";
@@ -20,33 +19,30 @@ export default class ShareScreen extends Component {
   };
 
   componentDidMount() {
+    this.getData();
+  }
+
+  getData = (d) => {
     SQLite.openDatabase("CODASH").transaction((tx) => {
       tx.executeSql(
-        `SELECT * INTO Profiles`,
+        `SELECT rowid, * FROM Profiles`,
         [],
-        (resultset) => {
-          console.log(resultset);
-          this.setState({ profiles: [] });
+        (t, resultset) => {
+          this.setState({ profiles: resultset.rows._array });
         },
         console.log
       );
     });
-  }
-
-  getData = async (d) => {
-    console.log("hey");
-    console.log(d);
   };
 
   delete = async (id) => {
     SQLite.openDatabase("CODASH").transaction((tx) => {
       tx.executeSql(
-        `DELETE * INTO Profiles WHERE rowid = ?`,
+        `DELETE FROM Profiles WHERE rowid=?`,
         [id],
-        (resultset) => {
-          console.log(resultset);
+        () => {
           const { profiles } = this.state;
-          const filtered = profiles.filter((x) => x.id != id);
+          const filtered = profiles.filter((x) => x.rowid != id);
           this.setState({ profiles: filtered });
         },
         console.log
@@ -64,7 +60,9 @@ export default class ShareScreen extends Component {
 
   createProfile = () => {
     this.props.navigation.navigate("CreateProfile", {
-      onGoBack: this.getData,
+      onGoBack: (created) => {
+        this.setState({ profiles: [...this.state.profiles, created] });
+      },
     });
   };
 
@@ -94,9 +92,12 @@ export default class ShareScreen extends Component {
             <FlatList
               data={this.state.profiles}
               renderItem={({ item }) => (
-                <ProfileCard onDelete={this.delete} data={item} />
+                <ProfileCard
+                  onDelete={() => this.delete(item.rowid)}
+                  data={item}
+                />
               )}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.rowid.toString()}
             />
           </SafeAreaView>
           <StyledButton text={t("SHARE")} type="primary" onPress={this.share} />
@@ -111,7 +112,7 @@ export default class ShareScreen extends Component {
             size={128}
             style={s.nodataIcon}
             color={COLORS.LightDark}
-            onPress={() => this.props.navigation.navigate("CreateProfile")}
+            onPress={this.createProfile}
           />
           <Text style={mainStyle.iconTitle}>{t("TAP_HERE")}</Text>
         </View>

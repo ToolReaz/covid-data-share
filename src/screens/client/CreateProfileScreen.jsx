@@ -21,9 +21,12 @@ export default class CreateProfileScreen extends Component {
         tx.executeSql(
           `INSERT INTO Profiles(lastname, firstname, phone, address) VALUES (?,?,?,?)`,
           [lastname, firstname, phone, address],
-          (resultset) => {
-            console.log(resultset);
-            this.props.navigation.goBack(resultset);
+          (t, resultset) => {
+            this.props.navigation.goBack();
+            this.props.route.params.onGoBack({
+              rowid: resultset.insertId,
+              ...this.state,
+            });
           },
           console.log
         );

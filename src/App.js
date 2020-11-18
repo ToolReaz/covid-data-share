@@ -13,31 +13,35 @@ import InitProfileScreen from "./screens/initialization/InitProfileScreen";
 import InitEndScreen from "./screens/initialization/InitEndScreen";
 import * as SQLite from "expo-sqlite";
 import { useRecoilState } from "recoil";
-import { metaDataState, userTypeState } from "./store/atoms/metaDataState";
+import { isInitState, userTypeState } from "./store/atoms/metaDataState";
 import { material } from "react-native-typography";
 import SplashScreen from "./screens/SplashScreen";
 import AsyncStorage from "@react-native-community/async-storage";
 import ClientHomeScreen from "./screens/client/ClientHomeScreen";
 import WorkerHomeScreen from "./screens/worker/WorkerHomeScreen";
 import { iniStorage } from "./libs/initStorage";
+import SettingScreen from "./screens/SettingScreen";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
-  const [isInit, setIsInit] = useRecoilState(metaDataState);
+  const [isInit, setIsInit] = useRecoilState(isInitState);
   const [userType, setUserType] = useRecoilState(userTypeState);
 
   useEffect(() => {
     (async () => {
       const isAppInit = await AsyncStorage.getItem("@covid-data-share/isInit");
-      const appUserType = await AsyncStorage.getItem("@covid-data-share/userType");
+      const appUserType = await AsyncStorage.getItem(
+        "@covid-data-share/userType"
+      );
 
       if (isAppInit === "true") {
         setIsInit(true);
-        //setUserType(appUserType);
-        setUserType("client");
+        setUserType(appUserType);
+        //setUserType("client");
       } else {
+        console.log("app not inited");
         await iniStorage();
         setIsInit(false);
       }
@@ -76,6 +80,11 @@ export default function App() {
           name="CreateProfile"
           component={CreateProfileScreen}
         />
+        <Stack.Screen
+          options={{ title: t("S_SETTINGS") }}
+          name="Settings"
+          component={SettingScreen}
+        />
       </>
     ) : (
       // Worker screens
@@ -104,6 +113,11 @@ export default function App() {
           options={{ title: t("S_CREATE_PROFILE") }}
           name="CreateProfile"
           component={CreateProfileScreen}
+        />
+        <Stack.Screen
+          options={{ title: t("S_SETTINGS") }}
+          name="Settings"
+          component={SettingScreen}
         />
       </>
     );
