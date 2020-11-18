@@ -47,7 +47,7 @@ const s = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: COLORS.Primary,
     height: 54,
-    borderRadius: 27,
+    borderRadius: 12,
     elevation: 3,
     shadowColor: COLORS.Shadow,
     shadowOffset: {
@@ -59,7 +59,7 @@ const s = StyleSheet.create({
   gradient: {
     justifyContent: "center",
     height: 54,
-    borderRadius: 27,
+    borderRadius: 12,
     elevation: 3,
   },
 
@@ -69,7 +69,7 @@ const s = StyleSheet.create({
     borderColor: COLORS.Primary,
     borderWidth: 2,
     height: 54,
-    borderRadius: 27,
+    borderRadius: 12,
     elevation: 1,
   },
 });
