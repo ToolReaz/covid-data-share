@@ -10,12 +10,7 @@ export const COLORS = {
   Info: "#53aaf4",
 
   Shadow: "#999999",
-
-  // To change
-  Secondary: "#4f98ca",
-  Dark: "#272727",
-  LightDark: "#2B2D42",
-  Light: "#effffb",
+  Text: "#222222",
 
   Black: "#000000",
   Grey: "#999999",

@@ -9,7 +9,7 @@ export default function InputField({ title, ...props }) {
     <View style={s.container}>
       <Text style={s.title}>{title}</Text>
       <TextInput
-        placeholderTextColor={COLORS.LightDark}
+        placeholderTextColor={COLORS.Grey}
         selectionColor={COLORS.LightDark}
         style={s.input}
         {...props}
@@ -24,16 +24,16 @@ const s = StyleSheet.create({
   },
   title: {
     ...material.subheading,
-    ...systemWeights.light,
-    color: COLORS.Dark,
+    ...systemWeights.medium,
+    color: COLORS.Text,
     marginBottom: 2,
   },
   input: {
     ...material.subheading,
     ...systemWeights.light,
     height: 42,
-    backgroundColor: COLORS.Light + "DD",
-    borderBottomColor: COLORS.Dark,
+    backgroundColor: COLORS.White,
+    borderBottomColor: COLORS.Primary + "44",
     borderBottomWidth: 1,
     paddingLeft: 8,
   },
