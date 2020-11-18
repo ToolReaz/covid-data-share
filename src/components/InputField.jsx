@@ -41,5 +41,5 @@ const s = StyleSheet.create({
 
 InputField.propTypes = {
   title: PropTypes.string.isRequired,
-  ...TextInput.PropTypes,
+  ...TextInput.propTypes,
 };

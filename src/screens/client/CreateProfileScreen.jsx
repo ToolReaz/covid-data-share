@@ -69,7 +69,7 @@ export default class CreateProfileScreen extends Component {
           value={this.state.address}
           title={t("ADDRESS")}
         />
-        <StyledButton text={t("CREATE")} type="primary" onPress={this.create} />
+        <StyledButton text={t("CREATE")} type="gradient" onPress={this.create} />
       </View>
     );
   }
