@@ -41,7 +41,6 @@ export default function App() {
         setUserType(appUserType);
         //setUserType("client");
       } else {
-        console.log("app not inited");
         await iniStorage();
         setIsInit(false);
       }
