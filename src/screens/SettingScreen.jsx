@@ -1,12 +1,15 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import React from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, Pressable } from "react-native";
 import { material, systemWeights } from "react-native-typography";
 import { useSetRecoilState } from "recoil";
 import { isInitState, userTypeState } from "../store/atoms/metaDataState";
 import * as SQLite from "expo-sqlite";
 import { useRecoilState } from "recoil";
 import { clearProfiles, resetApp } from "../libs/storage";
+import { MaterialIcons } from "@expo/vector-icons";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { COLORS } from "../styles/colors";
 
 export default function SettingScreen() {
   const setIsIntState = useSetRecoilState(isInitState);
@@ -54,38 +57,74 @@ export default function SettingScreen() {
 
   return (
     <View style={s.container}>
-      <View style={s.category}>
-        <Text style={s.categoryText}>Paramètres généraux</Text>
-      </View>
-      <View style={s.item} onTouchStart={switchMode}>
-        <Text style={s.itemText}>
-          Changer en mode {userType === "client" ? "restaurateur" : "client"}
-        </Text>
-      </View>
-      <View style={s.category}>
-        <Text style={s.categoryText}>Données</Text>
-      </View>
-      <View style={s.item} onTouchStart={deleteProfiles}>
-        <Text style={s.itemText}>Supprimer tout les profiles enregistrés</Text>
-      </View>
-      <View style={s.item} onTouchStart={reset}>
-        <Text style={s.itemText}>Réinitialiser l'application</Text>
-      </View>
+      <ScrollView>
+        <View style={s.category}>
+          <Text style={s.categoryText}>Paramètres généraux</Text>
+        </View>
+
+        <SettingItem
+          text={
+            "Changer en mode " +
+            (userType === "client" ? "restaurateur" : "client")
+          }
+          handler={switchMode}
+        />
+
+        <View style={s.category}>
+          <Text style={s.categoryText}>Données</Text>
+        </View>
+
+        <SettingItem
+          handler={deleteProfiles}
+          text="Supprimer tout les profiles enregistrés"
+        />
+        <SettingItem handler={reset} text="Réinitialiser l'application" />
+      </ScrollView>
     </View>
   );
 }
+
+const SettingItem = ({ handler, text }) => (
+  <>
+    <TouchableOpacity style={s.item} onPress={handler}>
+      <Text style={s.itemText}>{text}</Text>
+      <MaterialIcons
+        style={s.itemIcon}
+        name="navigate-next"
+        size={24}
+        color="black"
+      />
+    </TouchableOpacity>
+    <Separator />
+  </>
+);
+
+const Separator = () => (
+  <View
+    style={{
+      width: "90%",
+      alignSelf: "center",
+      borderBottomColor: COLORS.Grey + "11",
+      borderBottomWidth: 1,
+    }}
+  ></View>
+);
 
 const s = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
+    paddingRight: 16,
+    paddingLeft: 16,
   },
   category: {
     height: 32,
     width: "100%",
-    backgroundColor: "#DEDEDE",
     height: 50,
     justifyContent: "center",
+    borderBottomColor: COLORS.Primary,
+    borderBottomWidth: 1,
+    marginTop: 16,
   },
   categoryText: {
     ...material.subheading,
@@ -95,14 +134,16 @@ const s = StyleSheet.create({
   item: {
     height: 28,
     width: "100%",
-    backgroundColor: "#EEEEEE",
-    borderBottomColor: "#DEDEDE",
-    borderBottomWidth: 2,
     height: 50,
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   itemText: {
     ...material.body1,
     paddingLeft: 10,
+  },
+  itemIcon: {
+    paddingRight: 10,
   },
 });
