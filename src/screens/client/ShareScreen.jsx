@@ -47,20 +47,18 @@ export default class ShareScreen extends Component {
 
   delete = async (item) => {
     console.log(item);
-    /*
     SQLite.openDatabase("CODASH").transaction((tx) => {
       tx.executeSql(
         `DELETE FROM Profiles WHERE rowid=?`,
-        [id],
+        [item.rowid],
         () => {
           const { profiles } = this.state;
-          const filtered = profiles.filter((x) => x.rowid != id);
+          const filtered = profiles.filter((x) => x.rowid != item.rowid);
           this.setState({ profiles: filtered });
         },
         console.log
       );
     });
-    */
   };
 
   share = () => {

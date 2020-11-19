@@ -24,8 +24,19 @@ export default function ProfileCard({ data, onDelete, onSelect, delay = 1 }) {
     ]).start();
   };
 
+  const fadeOut = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 2000,
+      useNativeDriver: true,
+    }).start();
+  };
+
   useEffect(() => {
     fadeIn();
+    return () => {
+      fadeOut();
+    };
   }, []);
 
   const onToogle = (newValue) => {
