@@ -140,7 +140,7 @@ export default function App() {
     ? {
         header: (props) => (
           <View>
-            <LinearGradient colors={[COLORS.GradientStart, COLORS.GradientEnd]}>
+            <LinearGradient colors={[COLORS.GradientStart, COLORS.Primary]}>
               <Header {...props} />
             </LinearGradient>
           </View>
