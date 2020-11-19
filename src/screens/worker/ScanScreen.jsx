@@ -129,7 +129,7 @@ const s = StyleSheet.create({
   text: {
     ...material.headline,
     flex: 1,
-    color: COLORS.LightDark,
+    color: COLORS.Text,
     textAlign: "center",
     textAlignVertical: "center",
   },
@@ -142,7 +142,7 @@ const s = StyleSheet.create({
 
   modalTitle: {
     ...material.headline,
-    color: COLORS.Dark,
+    color: COLORS.Black,
     textAlign: "center",
     marginBottom: 20,
   },
@@ -150,7 +150,7 @@ const s = StyleSheet.create({
   resultText: {
     ...material.subheading,
     ...systemWeights.light,
-    color: COLORS.LightDark,
+    color: COLORS.Text,
     textAlign: "center",
     marginBottom: 12,
   },
