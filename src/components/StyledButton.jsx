@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import { LinearGradient } from "expo-linear-gradient";
 
 export function StyledButton({ type = "primary", text, onPress, style }) {
-  if ((type = "gradient"))
+  if ((type == "gradient"))
     return (
       <LinearGradient
         style={[s.gradient, style]}

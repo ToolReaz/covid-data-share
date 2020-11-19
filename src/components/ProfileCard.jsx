@@ -19,7 +19,7 @@ export default function ProfileCard({ data, onDelete, onSelect }) {
     <View style={s.container}>
       <View style={s.left}>
         <View style={s.line}>
-          <Text style={s.lastname}>{data.lastname?.toUpperCase()} </Text>
+          <Text style={s.lastname}>{data.lastname?.toUpperCase()}</Text>
           <Text style={s.firstname}> {data.firstname}</Text>
         </View>
         <Text style={s.address}>{data.address}</Text>
@@ -46,7 +46,7 @@ const s = StyleSheet.create({
   container: {
     backgroundColor: COLORS.Light,
     padding: 8,
-    marginBottom: 10,
+    marginBottom: 8,
     justifyContent: "space-between",
     flexDirection: "row",
   },
@@ -62,21 +62,23 @@ const s = StyleSheet.create({
   },
   lastname: {
     ...material.title,
-    color: COLORS.Primary,
+    color: COLORS.Black,
+    alignSelf: "flex-end",
   },
   firstname: {
     ...material.subheading,
     ...systemWeights.light,
-    color: COLORS.Primary,
+    color: COLORS.Text,
+    alignSelf: "flex-end",
   },
   address: {
     ...material.body1,
     ...systemWeights.thin,
-    color: COLORS.LightDark,
+    color: COLORS.Text,
   },
   phone: {
     ...material.body1,
     ...systemWeights.thin,
-    color: COLORS.LightDark,
+    color: COLORS.Text,
   },
 });

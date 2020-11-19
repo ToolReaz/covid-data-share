@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Alert, Modal } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileCard from "../../components/ProfileCard";
 import { StyledButton } from "../../components/StyledButton";
@@ -11,11 +11,13 @@ import StyledModal from "../../components/StyledModal";
 import { t } from "../../i18n/i18n";
 import { mainStyle } from "../../styles/mainStyle";
 import * as SQLite from "expo-sqlite";
+import { Entypo } from "@expo/vector-icons";
 
 export default class ShareScreen extends Component {
   state = {
     profiles: [],
     selectedProfiles: [],
+    activeShareBtn: false,
     showModal: false,
   };
 
@@ -37,7 +39,7 @@ export default class ShareScreen extends Component {
       tx.executeSql(
         `UPDATE Profiles SET share=? WHERE rowid=?`,
         [isSelected ? 1 : 0, profile.rowid],
-        (t, resultset) => {},
+        () => {},
         console.log
       );
     });
@@ -64,11 +66,12 @@ export default class ShareScreen extends Component {
         `SELECT lastname, firstname, phone, address FROM Profiles WHERE share=1`,
         [],
         (t, resultSet) => {
-          console.log(resultSet.rows._array);
-          this.setState({
-            selectedProfiles: resultSet.rows._array,
-            showModal: true,
-          });
+          if (resultSet.rows.length > 0) {
+            this.setState({
+              selectedProfiles: resultSet.rows._array,
+              showModal: true,
+            });
+          }
         },
         console.log
       );
@@ -104,25 +107,37 @@ export default class ShareScreen extends Component {
             <Text style={mainStyle.text}>Show this QR code to the scanner</Text>
           </StyledModal>
           <StyledButton
-            text={t("ADD")}
-            type="secondary"
+            text={t("ADD") + " +"}
+            type="transparent"
             onPress={this.createProfile}
           />
           <Text style={mainStyle.listTitle}>{t("MY_PROFILES")}</Text>
-          <SafeAreaView>
-            <FlatList
-              data={this.state.profiles}
-              renderItem={({ item }) => (
-                <ProfileCard
-                  onDelete={this.delete}
-                  onSelect={this.select}
-                  data={item}
-                />
-              )}
-              keyExtractor={(item) => item.rowid.toString()}
+          <FlatList
+            data={this.state.profiles}
+            onResponderTerminate={null}
+            ItemSeparatorComponent={listSeparator}
+            renderItem={({ item }) => (
+              <ProfileCard
+                onDelete={this.delete}
+                onSelect={this.select}
+                data={item}
+              />
+            )}
+            keyExtractor={(item) => item.rowid.toString()}
+          />
+          <View style={s.shareBtnView}>
+            <StyledButton
+              text={
+                <>
+                  {t("SHARE")}
+                  {"  "}
+                  <Entypo name="share" size={20} color={COLORS.White} />{" "}
+                </>
+              }
+              type="gradient"
+              onPress={this.share}
             />
-          </SafeAreaView>
-          <StyledButton text={t("SHARE")} type="primary" onPress={this.share} />
+          </View>
         </View>
       );
     } else {
@@ -143,10 +158,28 @@ export default class ShareScreen extends Component {
   }
 }
 
+const listSeparator = () => (
+  <View
+    style={{
+      width: "90%",
+      alignSelf: "center",
+      borderBottomColor: COLORS.Grey + "11",
+      borderBottomWidth: 1,
+      marginBottom: 4,
+    }}
+  ></View>
+);
+
 const s = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-start",
     padding: 16,
+  },
+
+  shareBtnView: {
+    marginTop: 8,
   },
 
   modal: {

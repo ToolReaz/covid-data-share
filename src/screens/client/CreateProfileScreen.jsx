@@ -25,6 +25,7 @@ export default class CreateProfileScreen extends Component {
             this.props.navigation.goBack();
             this.props.route.params.onGoBack({
               rowid: resultset.insertId,
+              share: 0,
               ...this.state,
             });
           },
