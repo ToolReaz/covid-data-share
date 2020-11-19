@@ -105,7 +105,7 @@ export default class ShareScreen extends Component {
               value={JSON.stringify(this.state.selectedProfiles)}
               size={200}
             />
-            <Text style={mainStyle.text}>Show this QR code to the scanner</Text>
+            <Text style={mainStyle.text}>{t("SHOW_THIS_QR")}</Text>
           </StyledModal>
           <StyledButton
             text={t("ADD") + " +"}

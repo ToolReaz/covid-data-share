@@ -29,6 +29,7 @@ export const fr = {
   SHARE: "Partager",
   CREATE: "Créer",
   LOADING: "Chargement",
+  CLOSE: "Fermer",
 
   // Screen names
   S_SHARE: "Partager",
@@ -48,6 +49,7 @@ export const fr = {
   // Share screen
   NO_PROFILE: "Vous n'avez pas encore saisi d'informations.",
   TAP_HERE: "Appuyer pour créer votre premier profil.",
+  SHOW_THIS_QR: "Montrer ce code QR au scan",
 
   // Store screen
   PRINT: "Imprimer",

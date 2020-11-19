@@ -28,6 +28,7 @@ export const en = {
   SHARE: "Share",
   CREATE: "Create",
   LOADING: "Loading",
+  CLOSE: "Close",
 
   // Screen names
   S_SHARE: "Share",
@@ -47,6 +48,7 @@ export const en = {
   // Share screen
   NO_PROFILE: "You didn't provided any information.",
   TAP_HERE: "Tap to create a new information profile.",
+  SHOW_THIS_QR: "Show this QR code to the scanner",
 
   // Store screen
   PRINT: "Print",

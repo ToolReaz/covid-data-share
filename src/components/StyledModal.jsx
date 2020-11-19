@@ -3,6 +3,7 @@ import { View, Text, Modal, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../styles/colors";
 import { material, systemWeights } from "react-native-typography";
+import { t } from "../i18n/i18n";
 
 export default function StyledModal({ show, onClose, children }) {
   return (
@@ -10,7 +11,7 @@ export default function StyledModal({ show, onClose, children }) {
       <View style={s.modal}>
         <View style={s.modalInner}>
           <Text onPress={onClose} style={s.modalClose}>
-            Close
+            {t("CLOSE")}
             <AntDesign name="close" size={20} color={COLORS.LightDark} />
           </Text>
           {children}
