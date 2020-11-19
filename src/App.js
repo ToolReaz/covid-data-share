@@ -23,7 +23,7 @@ import SplashScreen from "./screens/SplashScreen";
 import AsyncStorage from "@react-native-community/async-storage";
 import ClientHomeScreen from "./screens/client/ClientHomeScreen";
 import WorkerHomeScreen from "./screens/worker/WorkerHomeScreen";
-import { iniStorage } from "./libs/initStorage";
+import { iniStorage } from "./libs/storage";
 import SettingScreen from "./screens/SettingScreen";
 import { LinearGradient } from "expo-linear-gradient";
 import { View } from "react-native";

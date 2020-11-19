@@ -6,6 +6,7 @@ import { useSetRecoilState } from "recoil";
 import { isInitState, userTypeState } from "../store/atoms/metaDataState";
 import * as SQLite from "expo-sqlite";
 import { useRecoilState } from "recoil";
+import { clearProfiles, resetApp } from "../libs/storage";
 
 export default function SettingScreen() {
   const setIsIntState = useSetRecoilState(isInitState);
@@ -18,11 +19,10 @@ export default function SettingScreen() {
       [
         { style: "cancel", onPress: () => {}, text: "Cancel" },
         {
-          onPress: () => {
-            clearProfiles(async () => {
-              await AsyncStorage.setItem("@covid-data-share/isInit", "false");
-              setIsIntState(false);
-            });
+          onPress: async () => {
+            await clearProfiles();
+            await resetApp();
+            setIsIntState(false);
           },
         },
       ],
@@ -30,22 +30,15 @@ export default function SettingScreen() {
     );
   };
 
-  const clearProfiles = (callback = () => {}) => {
+  const deleteProfiles = () => {
     Alert.alert(
       "Attention",
       "Ceci supprimera tout vos profiles crées et enregistrés !",
       [
         { style: "cancel", onPress: () => {}, text: "Cancel" },
         {
-          onPress: () => {
-            SQLite.openDatabase("CODASH").transaction((tx) => {
-              tx.executeSql(
-                `DROP TABLE Profiles`,
-                [],
-                () => callback(),
-                console.log
-              );
-            });
+          onPress: async () => {
+            await clearProfiles();
           },
         },
       ],
@@ -72,7 +65,7 @@ export default function SettingScreen() {
       <View style={s.category}>
         <Text style={s.categoryText}>Données</Text>
       </View>
-      <View style={s.item} onTouchStart={clearProfiles}>
+      <View style={s.item} onTouchStart={deleteProfiles}>
         <Text style={s.itemText}>Supprimer tout les profiles enregistrés</Text>
       </View>
       <View style={s.item} onTouchStart={reset}>

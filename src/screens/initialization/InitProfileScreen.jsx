@@ -72,6 +72,7 @@ export default class InitProfileScreen extends Component {
         </Animated.View>
         <Animated.View style={{ opacity: this.state.fieldsFade }}>
           <InputField
+            placeholder="Doe"
             autoCompleteType="name"
             returnKeyType="next"
             onChangeText={(lastname) => this.setState({ lastname })}
@@ -79,6 +80,7 @@ export default class InitProfileScreen extends Component {
             title={t("LASTNAME")}
           />
           <InputField
+            placeholder="John"
             autoCompleteType="name"
             returnKeyType="next"
             onChangeText={(firstname) => this.setState({ firstname })}
@@ -86,7 +88,7 @@ export default class InitProfileScreen extends Component {
             title={t("FIRSTNAME")}
           />
           <InputField
-            ref={this.input3}
+            placeholder="285 255 488"
             autoCompleteType="tel"
             returnKeyType="next"
             keyboardType="phone-pad"
@@ -95,7 +97,7 @@ export default class InitProfileScreen extends Component {
             title={t("PHONE")}
           />
           <InputField
-            ref={this.input4}
+            placeholder="24 Blue Street, New York, US"
             autoCompleteType="street-address"
             onChangeText={(address) => this.setState({ address })}
             value={this.state.address}
