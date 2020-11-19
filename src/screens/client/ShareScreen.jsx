@@ -45,7 +45,9 @@ export default class ShareScreen extends Component {
     });
   };
 
-  delete = async (id) => {
+  delete = async (item) => {
+    console.log(item);
+    /*
     SQLite.openDatabase("CODASH").transaction((tx) => {
       tx.executeSql(
         `DELETE FROM Profiles WHERE rowid=?`,
@@ -58,6 +60,7 @@ export default class ShareScreen extends Component {
         console.log
       );
     });
+    */
   };
 
   share = () => {
@@ -116,11 +119,12 @@ export default class ShareScreen extends Component {
             data={this.state.profiles}
             onResponderTerminate={null}
             ItemSeparatorComponent={listSeparator}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <ProfileCard
                 onDelete={this.delete}
                 onSelect={this.select}
                 data={item}
+                delay={index}
               />
             )}
             keyExtractor={(item) => item.rowid.toString()}

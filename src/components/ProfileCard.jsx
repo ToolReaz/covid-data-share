@@ -1,44 +1,81 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import React, { useState, useEffect, useRef } from "react";
+import { View, Text, StyleSheet, Animated } from "react-native";
 import { material, systemWeights } from "react-native-typography";
 import { COLORS } from "../styles/colors";
 import CheckBox from "@react-native-community/checkbox";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import { RectButton } from "react-native-gesture-handler";
+import { AntDesign } from "@expo/vector-icons";
 
-export default function ProfileCard({ data, onDelete, onSelect }) {
+export default function ProfileCard({ data, onDelete, onSelect, delay = 1 }) {
   const [toggleCheckBox, setToggleCheckBox] = useState(
     data.share === 0 ? false : true
   );
+
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const fadeIn = () => {
+    Animated.sequence([
+      Animated.delay(delay * 200),
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 2000,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
+  useEffect(() => {
+    fadeIn();
+  }, []);
 
   const onToogle = (newValue) => {
     onSelect(data, newValue);
     setToggleCheckBox(newValue);
   };
 
+  const leftRender = (progress, dragX) => {
+    let trans = dragX.interpolate({
+      inputRange: [0, 50, 100, 101],
+      outputRange: [-20, 0, 0, 1],
+    });
+
+    return (
+      <RectButton onPress={() => onDelete(data)}>
+        <Animated.Text
+          style={[s.rectButton, { transform: [{ translateX: trans }] }]}
+        >
+          <AntDesign name="delete" size={32} color={COLORS.Danger} />
+        </Animated.Text>
+      </RectButton>
+    );
+  };
+
   return (
-    <View style={s.container}>
-      <View style={s.left}>
-        <View style={s.line}>
-          <Text style={s.lastname}>{data.lastname?.toUpperCase()}</Text>
-          <Text style={s.firstname}> {data.firstname}</Text>
+    <Swipeable overshootLeft={false} renderLeftActions={leftRender}>
+      <Animated.View style={[s.container, { opacity: fadeAnim }]}>
+        <View style={s.left}>
+          <View style={s.line}>
+            <Text style={s.lastname}>{data.lastname?.toUpperCase()}</Text>
+            <Text style={s.firstname}> {data.firstname}</Text>
+          </View>
+          <Text style={s.address}>{data.address}</Text>
+          <Text style={s.phone}>{data.phone}</Text>
         </View>
-        <Text style={s.address}>{data.address}</Text>
-        <Text style={s.phone}>{data.phone}</Text>
-      </View>
-      <View style={s.right}>
-        <CheckBox
-          style={s.checkbox}
-          tintColors={{ true: COLORS.Primary, false: COLORS.Dark }}
-          tintColor={COLORS.Dark}
-          onFillColor={COLORS.Primary}
-          onResponderTerminate={COLORS.Primary}
-          boxType="square"
-          disabled={false}
-          value={toggleCheckBox}
-          onValueChange={onToogle}
-        />
-      </View>
-    </View>
+        <View style={s.right}>
+          <CheckBox
+            style={s.checkbox}
+            tintColors={{ true: COLORS.Primary, false: COLORS.Dark }}
+            tintColor={COLORS.Dark}
+            onFillColor={COLORS.Primary}
+            onResponderTerminate={COLORS.Primary}
+            boxType="square"
+            disabled={false}
+            value={toggleCheckBox}
+            onValueChange={onToogle}
+          />
+        </View>
+      </Animated.View>
+    </Swipeable>
   );
 }
 
@@ -51,11 +88,19 @@ const s = StyleSheet.create({
     flexDirection: "row",
   },
 
+  rectButton: {
+    height: "100%",
+    textAlignVertical: "center",
+    paddingRight: 20,
+    marginLeft: 10,
+    borderRightWidth: 1,
+    borderRightColor: COLORS.Grey + "11",
+    borderRadius: 40,
+  },
+
   right: {
     alignSelf: "center",
   },
-
-  checkbox: {},
 
   line: {
     flexDirection: "row",
