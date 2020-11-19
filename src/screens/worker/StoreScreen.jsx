@@ -117,16 +117,16 @@ export default class StoreScreen extends Component {
             onPress={this.clear}
           />
         </View>
-        <SafeAreaView>
-          <FlatList
-            data={this.state.store}
-            renderItem={({ item }) => (
-              <ProfileCard onDelete={this.delete} data={item} />
-            )}
-            keyExtractor={(item) => item.id}
-          />
-        </SafeAreaView>
-        <StyledButton text={t("SELECT_ALL")} type="gradient" />
+        <FlatList
+          data={this.state.store}
+          renderItem={({ item }) => (
+            <ProfileCard onDelete={this.delete} data={item} />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+        <View style={s.selectBtnView}>
+          <StyledButton text={t("SELECT_ALL")} type="gradient" />
+        </View>
       </View>
     );
   }
@@ -137,6 +137,10 @@ const s = StyleSheet.create({
     flex: 1,
     height: "100%",
     padding: 16,
+  },
+
+  selectBtnView: {
+    marginTop: 8,
   },
 
   line: {
