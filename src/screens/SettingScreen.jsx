@@ -11,8 +11,6 @@ export default function SettingScreen() {
   const setIsIntState = useSetRecoilState(isInitState);
   const [userType, setUserType] = useRecoilState(userTypeState);
 
-  console.log(userType);
-
   const reset = () => {
     Alert.alert(
       "Attention",
@@ -41,7 +39,12 @@ export default function SettingScreen() {
         {
           onPress: () => {
             SQLite.openDatabase("CODASH").transaction((tx) => {
-              tx.executeSql(`DROP TABLE Profiles`, [], callback, console.log);
+              tx.executeSql(
+                `DROP TABLE Profiles`,
+                [],
+                () => callback(),
+                console.log
+              );
             });
           },
         },

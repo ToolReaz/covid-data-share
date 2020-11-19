@@ -128,15 +128,15 @@ export default class ShareScreen extends Component {
     } else {
       return (
         <View style={s.nodataContainer}>
-          <Text style={mainStyle.iconTitle}>{t("NO_PROFILE")}</Text>
+          <Text style={mainStyle.text}>{t("NO_PROFILE")}</Text>
           <Feather
             name="edit"
             size={128}
             style={s.nodataIcon}
-            color={COLORS.LightDark}
+            color={COLORS.Primary}
             onPress={this.createProfile}
           />
-          <Text style={mainStyle.iconTitle}>{t("TAP_HERE")}</Text>
+          <Text style={mainStyle.text}>{t("TAP_HERE")}</Text>
         </View>
       );
     }

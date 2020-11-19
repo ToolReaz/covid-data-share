@@ -90,7 +90,7 @@ export default class StoreScreen extends Component {
                 name="printer"
                 style={{ textAlign: "center" }}
                 size={48}
-                color={COLORS.Dark}
+                color={COLORS.Black}
               />
               <Text style={mainStyle.iconTitleLD}>{t("PRINT")}</Text>
             </TouchableOpacity>
@@ -101,7 +101,7 @@ export default class StoreScreen extends Component {
                 name="pdffile1"
                 style={{ textAlign: "center" }}
                 size={48}
-                color={COLORS.Dark}
+                color={COLORS.Black}
               />
               <Text style={mainStyle.iconTitleLD}>{t("EXPORT_PDF")}</Text>
             </TouchableOpacity>
@@ -113,7 +113,7 @@ export default class StoreScreen extends Component {
             style={s.deleteIcon}
             name="delete"
             size={24}
-            color={COLORS.LightDark}
+            color={COLORS.Black}
             onPress={this.clear}
           />
         </View>
@@ -126,7 +126,7 @@ export default class StoreScreen extends Component {
             keyExtractor={(item) => item.id}
           />
         </SafeAreaView>
-        <StyledButton text={t("SELECT_ALL")} type="secondary" />
+        <StyledButton text={t("SELECT_ALL")} type="gradient" />
       </View>
     );
   }
@@ -152,7 +152,7 @@ const s = StyleSheet.create({
   button: {
     flex: 1,
     alignItems: "center",
-    borderColor: COLORS.LightDark,
+    borderColor: COLORS.Black,
     borderWidth: 3,
     paddingTop: 10,
     paddingBottom: 10,

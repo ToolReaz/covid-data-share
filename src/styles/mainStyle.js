@@ -6,7 +6,7 @@ export const mainStyle = StyleSheet.create({
   title: {
     ...material.display1,
     ...systemWeights.light,
-    color: COLORS.Dark,
+    color: COLORS.Black,
     textAlign: "center",
   },
 
@@ -18,9 +18,8 @@ export const mainStyle = StyleSheet.create({
   },
 
   text: {
-    fontSize: 18,
-    fontFamily: "RobotoLight",
-    color: COLORS.LightDark,
+    ...material.headline,
+    color: COLORS.Text,
     textAlign: "center",
     marginTop: 20,
   },
@@ -29,20 +28,20 @@ export const mainStyle = StyleSheet.create({
     ...material.headline,
     ...systemWeights.semibold,
     textAlign: "center",
-    color: COLORS.Dark,
+    color: COLORS.Black,
   },
 
   iconTitleLD: {
     ...material.title,
     ...systemWeights.regular,
     textAlign: "center",
-    color: COLORS.LightDark,
+    color: COLORS.Grey,
   },
 
   listTitle: {
     ...material.title,
     ...systemWeights.light,
-    color: COLORS.LightDark,
+    color: COLORS.Text,
     marginTop: 20,
   },
 });

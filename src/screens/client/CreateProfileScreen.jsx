@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import React, { Component, createRef } from "react";
+import { Alert, StyleSheet, View } from "react-native";
 import InputField from "../../components/InputField";
 import { StyledButton } from "../../components/StyledButton";
 import { t } from "i18n-js";
@@ -40,6 +40,7 @@ export default class CreateProfileScreen extends Component {
     return (
       <View style={s.container}>
         <InputField
+          placeholder="Doe"
           autoCompleteType="name"
           returnKeyType="next"
           onChangeText={(lastname) => this.setState({ lastname })}
@@ -47,6 +48,7 @@ export default class CreateProfileScreen extends Component {
           title={t("LASTNAME")}
         />
         <InputField
+          placeholder="John"
           autoCompleteType="name"
           returnKeyType="next"
           onChangeText={(firstname) => this.setState({ firstname })}
@@ -54,7 +56,7 @@ export default class CreateProfileScreen extends Component {
           title={t("FIRSTNAME")}
         />
         <InputField
-          ref={this.input3}
+          placeholder="285 255 488"
           autoCompleteType="tel"
           returnKeyType="next"
           keyboardType="phone-pad"
@@ -63,13 +65,17 @@ export default class CreateProfileScreen extends Component {
           title={t("PHONE")}
         />
         <InputField
-          ref={this.input4}
+          placeholder="24 Blue Street, New York, US"
           autoCompleteType="street-address"
           onChangeText={(address) => this.setState({ address })}
           value={this.state.address}
           title={t("ADDRESS")}
         />
-        <StyledButton text={t("CREATE")} type="gradient" onPress={this.create} />
+        <StyledButton
+          text={t("CREATE")}
+          type="gradient"
+          onPress={this.create}
+        />
       </View>
     );
   }

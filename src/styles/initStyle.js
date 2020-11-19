@@ -6,7 +6,7 @@ export const initStyle = StyleSheet.create({
   title: {
     ...material.display1,
     ...systemWeights.light,
-    color: COLORS.Dark,
+    color: COLORS.Black,
     textAlign: "center",
   },
 
@@ -20,7 +20,7 @@ export const initStyle = StyleSheet.create({
   text: {
     ...material.body1,
     ...systemWeights.light,
-    color: COLORS.Dark,
+    color: COLORS.Text,
     textAlign: "center",
     marginTop: 40,
   },
@@ -28,7 +28,7 @@ export const initStyle = StyleSheet.create({
   iconText: {
     ...material.headline,
     ...systemWeights.bold,
-    color: COLORS.Dark,
+    color: COLORS.Text,
     textAlign: "center",
   },
 });

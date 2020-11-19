@@ -21,7 +21,7 @@ export default function WorkerHomeScreen({ navigation }) {
             style={s.linkView}
             onTouchStart={() => navigation.navigate("Scan")}
           >
-            <AntDesign name="scan1" size={128} color={COLORS.Dark} />
+            <AntDesign name="scan1" size={128} color={COLORS.Black} />
             <Text style={[mainStyle.iconTitle]}>{t("COLLECT_BTN")}</Text>
           </View>
         </View>
